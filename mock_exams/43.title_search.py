@@ -8,6 +8,15 @@ line (title). The sequence may not be on consecutive indices. Each time
 you find a sequence of these characters you remove it from the initial 
 string and print the modified string. If no such sequence is found 
 you have to print No such title found! and not modify the string.
+
+Input
+cfoadset
+2
+code
+slow
+Output
+fast
+No such title found!
 '''
 
 string = input()
