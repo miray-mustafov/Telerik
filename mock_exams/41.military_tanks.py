@@ -14,10 +14,10 @@ x, y = 0, 0
 for comm in commands:
     if comm == 'L':
         x -= 1
-    if comm == 'R':
+    elif comm == 'R':
         x += 1
-    if comm == 'U':
+    elif comm == 'U':
         y += 1
-    if comm == 'D':
+    elif comm == 'D':
         y -= 1
-print(f"{x}, {y}")
+print(f"({x}, {y})")
