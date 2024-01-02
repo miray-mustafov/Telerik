@@ -1,6 +1,7 @@
 s = input()
 
 import re
+
 broken_pattern = r'[^a-zA-Z0-9\s]'
 longest_seq_br_chars = current_seq_br_chars = 0
 for char in s:
