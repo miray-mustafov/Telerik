@@ -1,10 +1,7 @@
 def get_word():
     word = input('Give only letter word! length >= 3: ')
-    if len(word) < 3:
+    if len(word) < 3 or not word.isalpha():
         return get_word()
-    for i in range(len(word)):  # check each element in word if is alphabet letter
-        if not word[i].isalpha():
-            return get_word()
     return word.lower()
 
 
