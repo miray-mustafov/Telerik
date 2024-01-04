@@ -14,7 +14,7 @@ def get_initial_positions(l):
 def hide_word(word, positions):
     res = ''
     for i in range(len(word)):
-        if positions[i] == True:
+        if positions[i]:
             res += word[i]
         else:
             res += '-'
