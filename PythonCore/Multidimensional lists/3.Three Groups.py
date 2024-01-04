@@ -1,7 +1,7 @@
 nums = input().split()
 groups = [[], [], []]
 for num in nums:
-    groups[int(num) % 3].append(int(num))
+    groups[int(num) % 3].append(num)
 for group in groups:
     print(*group, sep=' ')
 
