@@ -47,7 +47,7 @@ res = matrix[0][0]
 r = c = 0
 dr = dc = 1
 while True:
-    if 0 <= r + dr < rows and 0 <= c + dc < cols:
+    if 0 <= r + dr < rows and 0 <= c + dc < cols:  # check if next step is in bounds
         step = matrix[r + dr][c + dc]
         r, c = r + dr, c + dc
         res += step
