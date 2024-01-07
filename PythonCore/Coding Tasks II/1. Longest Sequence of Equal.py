@@ -11,6 +11,7 @@ def solution():
             max_equal_sequence = max(max_equal_sequence, r - l)
             l = r
         r += 1
+
     return max(max_equal_sequence, r - l)
 
 

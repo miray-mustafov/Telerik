@@ -1,23 +1,26 @@
 def solution():
     text = input()
     if len(text) == 1: return text
-    l = longest_block_start_i = 0
-    r = longest_block_end_i = 1
+    l = max_l = 0
+    r = max_r = 1
+
     while r < len(text):
         if text[l] != text[r]:
-            if r - l > longest_block_end_i - longest_block_start_i:
-                longest_block_start_i, longest_block_end_i = l, r
+            if r - l > max_r - max_l:
+                max_l, max_r = l, r
             l = r
         r += 1
 
-    if r - l > longest_block_end_i - longest_block_start_i:
-        longest_block_start_i, longest_block_end_i = l, r
+    if r - l > max_r - max_l:
+        max_l, max_r = l, r
 
-    return text[longest_block_start_i: longest_block_end_i]
+    return text[max_l: max_r]
 
 
 print(solution())
+
 ''' examples
 aCCCdddd => dddd
+aCCCddd => CCC
 abbCCCcddBBBxx => CCC
 '''
