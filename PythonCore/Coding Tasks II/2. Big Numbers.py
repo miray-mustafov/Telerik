@@ -1,4 +1,5 @@
 from itertools import zip_longest
+
 n1, n2 = map(int, input().split())
 list1 = map(int, input().split())
 list2 = map(int, input().split())
@@ -13,10 +14,10 @@ for d1, d2 in zip_longest(list1, list2, fillvalue=0):
         res.append(sumed_digit)
         carry = 0
 
-if carry:
+if carry:  # !!!
     res.append(carry)
-print(*res)
 
+print(*res)
 
 # n1, n2 = map(int, input().split())
 # list1 = list(map(int, input().split()))
@@ -47,4 +48,3 @@ print(*res)
 #     i += 1
 #
 # print(*res)
-
