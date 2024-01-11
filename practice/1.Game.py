@@ -11,4 +11,6 @@ case5 = digit1 * digit2 + digit3
 case6 = digit1 + digit2 * digit3
 
 max_result = max(case1, case2, case3, case4, case5, case6)
+
 print(max_result)
+# test
