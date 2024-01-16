@@ -7,26 +7,26 @@ class ItemStatus:
 
     @classmethod
     def next(cls, current):
-        if current == ItemStatus.OPEN:
-            return ItemStatus.TODO
-        elif current == ItemStatus.TODO:
-            return ItemStatus.IN_PROGRESS
-        elif current == ItemStatus.IN_PROGRESS:
-            return ItemStatus.DONE
-        elif current == ItemStatus.DONE:
-            return ItemStatus.VERIFIED
-        elif current == ItemStatus.VERIFIED:
-            return ItemStatus.VERIFIED
+        if current == cls.OPEN:
+            return cls.TODO
+        elif current == cls.TODO:
+            return cls.IN_PROGRESS
+        elif current == cls.IN_PROGRESS:
+            return cls.DONE
+        elif current == cls.DONE:
+            return cls.VERIFIED
+        elif current == cls.VERIFIED:
+            return cls.VERIFIED
 
     @classmethod
     def previous(cls, current):
-        if current == ItemStatus.OPEN:
-            return ItemStatus.OPEN
-        elif current == ItemStatus.TODO:
-            return ItemStatus.OPEN
-        elif current == ItemStatus.IN_PROGRESS:
-            return ItemStatus.TODO
-        elif current == ItemStatus.DONE:
-            return ItemStatus.IN_PROGRESS
-        elif current == ItemStatus.VERIFIED:
-            return ItemStatus.DONE
+        if current == cls.OPEN:
+            return cls.OPEN
+        elif current == cls.TODO:
+            return cls.OPEN
+        elif current == cls.IN_PROGRESS:
+            return cls.TODO
+        elif current == cls.DONE:
+            return cls.IN_PROGRESS
+        elif current == cls.VERIFIED:
+            return cls.DONE
