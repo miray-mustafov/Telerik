@@ -1,34 +1,45 @@
 class Product:
     def __init__(self, name, brand, price, gender):
-        raise NotImplementedError()
+        self.name = name
+        self.brand = brand
+        self.price = price
+        if gender not in ('Men', 'Women', 'Unisex'):
+            raise ValueError('Gender type can be "Men", "Women" or "Unisex"!')
+        self._gender = gender
 
     @property
     def name(self):
-        raise NotImplementedError()
+        return self._name
 
     @name.setter
     def name(self, value):
-        raise NotImplementedError()
+        if not 3 <= len(value) <= 10:
+            raise ValueError('Minimum product name’s length is 3 symbols and maximum is 10 symbols!')
+        self._name = value
 
     @property
     def brand(self):
-        raise NotImplementedError()
+        return self._brand
 
     @brand.setter
     def brand(self, value):
-        raise NotImplementedError()
+        if not 2 <= len(value) <= 10:
+            raise ValueError('Minimum brand name’s length is 2 symbols and maximum is 10 symbols!')
+        self._brand = value
 
     @property
     def price(self):
-        raise NotImplementedError()
+        return self._price
 
     @price.setter
     def price(self, value):
-        raise NotImplementedError()
+        if value < 0:
+            raise ValueError('Price cannot be negative!')
+        self._price = value
 
     @property
     def gender(self):
-        raise NotImplementedError()
+        return self._gender
 
     def to_string(self):
-        raise NotImplementedError()
+        return f' #{self.name} {self.brand}\n #Price: ${self.price:.2f}\n #Gender: {self.gender}'
