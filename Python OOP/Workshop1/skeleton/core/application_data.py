@@ -7,15 +7,15 @@ class ApplicationData:
     def __init__(self):
         self._products = []
         self._categories = []
-        self._shopping_cart = None  # todo
+        self._shopping_cart = ShoppingCart()
 
     @property
     def products(self):
-        return self._products
+        return tuple(self._products)
 
     @property
     def categories(self):
-        return self._categories
+        return tuple(self._categories)
 
     @property
     def shopping_cart(self) -> ShoppingCart:
@@ -35,14 +35,12 @@ class ApplicationData:
 
     def create_category(self, name) -> None:
         if self.category_exists(name):
-            # raise ValueError(f'Category {name} already exists!')
-            return  # todo
+            raise ValueError(f'Category {name} already exists!')
         self._categories.append(Category(name))
 
     def create_product(self, name, brand, price, gender) -> None:
         if self.product_exists(name):
-            # raise ValueError(f'Product {name} already exists!')
-            return
+            raise ValueError(f'Product {name} already exists!')
         self._products.append(Product(name, brand, price, gender))
 
     def category_exists(self, name) -> bool:

@@ -1,11 +1,14 @@
+from models.gender import Gender
+
+
 class Product:
     def __init__(self, name, brand, price, gender):
         self.name = name
         self.brand = brand
         self.price = price
-        if gender not in ('Men', 'Women', 'Unisex'):
-            raise ValueError('Gender type can be "Men", "Women" or "Unisex"!')
-        self._gender = gender
+        # if gender not in ('Men', 'Women', 'Unisex'):
+        #     raise ValueError('Gender type can be "Men", "Women" or "Unisex"!')
+        self._gender = Gender.from_string(gender)
 
     @property
     def name(self):
@@ -43,3 +46,6 @@ class Product:
 
     def to_string(self):
         return f' #{self.name} {self.brand}\n #Price: ${self.price:.2f}\n #Gender: {self.gender}'
+
+    # def __repr__(self):
+    #     return f'{self.brand} {self.name} {self.price}$'

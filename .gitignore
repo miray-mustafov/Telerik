@@ -1,4 +1,12 @@
-#.gitignore #Ignore it itselft first
+#.gitignore #Igno#.gitignore #Ignore it itselft first
+tst.py
+.idea/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/re it itselft first
+tst.py
 .idea/
 __pycache__/
 *.pyc
