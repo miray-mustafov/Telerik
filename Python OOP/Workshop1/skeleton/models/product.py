@@ -6,8 +6,6 @@ class Product:
         self.name = name
         self.brand = brand
         self.price = price
-        # if gender not in ('Men', 'Women', 'Unisex'):
-        #     raise ValueError('Gender type can be "Men", "Women" or "Unisex"!')
         self._gender = Gender.from_string(gender)
 
     @property
