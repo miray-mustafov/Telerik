@@ -1,12 +1,9 @@
-from models.gender import Gender
-
-
 class Product:
     def __init__(self, name, brand, price, gender):
         self.name = name
         self.brand = brand
         self.price = price
-        self._gender = Gender.from_string(gender)
+        self._gender = gender  # validated from commands
 
     @property
     def name(self):

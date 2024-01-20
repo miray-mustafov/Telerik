@@ -24,7 +24,6 @@ class Category:
 
     def remove_product(self, product):
         self._products.remove(product)
-        # todo check
 
     def to_string(self):
         res = f'#Category: {self.name}\n'
