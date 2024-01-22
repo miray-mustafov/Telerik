@@ -11,8 +11,8 @@ class BoardItem:
         self._title = title
         self._due_date = due_date
         self._status = ItemStatus.OPEN
-        self._history = []
 
+        self._history = []
         self._log_event(f'Item created: {self.info()}')
 
     @property
