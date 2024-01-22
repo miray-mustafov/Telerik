@@ -5,8 +5,8 @@ from event_log import EventLog
 
 class BoardItem:
     def __init__(self, title: str, due_date: date):
-        self._ensure_valid_title(title)
-        self._ensure_valid_due_date(due_date)
+        BoardItem._ensure_valid_title(title)
+        BoardItem._ensure_valid_due_date(due_date)
 
         self._title = title
         self._due_date = due_date
@@ -66,10 +66,12 @@ class BoardItem:
         else:
             self._log_event(f'Status changed from {prev} to {current}')
 
-    def _ensure_valid_title(self, title):
+    @staticmethod
+    def _ensure_valid_title(title):
         if (len(title) < 5 or len(title) > 30):
             raise ValueError('Illegal title length [5:30]')
 
-    def _ensure_valid_due_date(self, due_date):
+    @staticmethod
+    def _ensure_valid_due_date(due_date):
         if (due_date < date.today()):
             raise ValueError('Due date cant be in the past.')
