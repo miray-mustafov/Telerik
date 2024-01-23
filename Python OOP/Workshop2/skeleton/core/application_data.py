@@ -1,4 +1,5 @@
 from models.category import Category
+from models.cream import Cream
 from models.product import Product
 from models.shampoo import Shampoo
 from models.shopping_cart import ShoppingCart
@@ -53,6 +54,11 @@ class ApplicationData:
         toothpaste = Toothpaste(name, brand, price, gender, ingredients)
         self._products.append(toothpaste)
         return toothpaste
+
+    def create_cream(self, name, brand, price, gender, scent) -> Cream:
+        cream = Cream(name, brand, price, gender, scent)
+        self._products.append(cream)
+        return cream
 
     def category_exists(self, name) -> bool:
         return name in [c.name for c in self._categories]

@@ -1,6 +1,7 @@
 from commands.add_to_category import AddToCategoryCommand
 from commands.add_to_shopping_cart import AddToShoppingCartCommand
 from commands.create_category import CreateCategoryCommand
+from commands.create_cream import CreateCreamCommand
 from commands.create_shampoo import CreateShampooCommand
 from commands.create_toothpaste import CreateToothpasteCommand
 from commands.remove_from_category import RemoveFromCategoryCommand
@@ -16,6 +17,8 @@ class CommandFactory:
     def create(self, input_line):
         cmd, *params = input_line.split()
 
+        if cmd.lower() == 'createcream':
+            return CreateCreamCommand(params, self._app_data)
         if cmd.lower() == "createcategory":
             return CreateCategoryCommand(params, self._app_data)
         if cmd.lower() == "createshampoo":

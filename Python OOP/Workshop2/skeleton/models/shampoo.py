@@ -12,7 +12,7 @@ def _validate_milliliters(value):
 
 
 def _swap_if_needed(milliliters, usage_type):
-    if isinstance(usage_type, int) or usage_type.isdigit() or (usage_type[0] == '-' and usage_type[1:].isdigit()):
+    if isinstance(usage_type, int):
         milliliters, usage_type = usage_type, milliliters
 
     return milliliters, usage_type
