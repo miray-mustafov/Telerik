@@ -45,10 +45,14 @@ class ApplicationData:
         self._categories.append(category)
 
     def create_shampoo(self, name, brand, price, gender, usage_type, milliliters) -> Shampoo:
-        raise NotImplementedError()
+        shampoo = Shampoo(name, brand, price, gender, usage_type, milliliters)
+        self._products.append(shampoo)
+        return shampoo
 
     def create_toothpaste(self, name, brand, price, gender, ingredients) -> Toothpaste:
-        raise NotImplementedError()
+        toothpaste = Toothpaste(name, brand, price, gender, ingredients)
+        self._products.append(toothpaste)
+        return toothpaste
 
     def category_exists(self, name) -> bool:
         return name in [c.name for c in self._categories]
