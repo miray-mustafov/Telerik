@@ -1,155 +1,169 @@
-<img src="https://i.imgur.com/yqIN5FX.png" width="300px" />
+<img src="https://webassets.telerikacademy.com/images/default-source/logos/telerik-academy.svg" alt="logo" width="300px" style="margin-top: 20px;"/>
 
-# Cosmetics shop - workshop (OOP - Classes exercise)
+# BoardR - Task Organizing System
 
-### 1. Description
-The shop already has a working Engine. You do not have to touch anything in it. Just use it.
-Each product has **name, brand, price and gender** (men, women, unisex).
-There are **categories** of products. Each **category** has **name** and products can be **added or removed**. There is also a **shopping cart**. Products can be **added or removed** from it. The same product can be added to the shopping cart more than once. The shopping cart can calculate the **total price** of all products in it.
-- Your **task** is to **finish the implementation** of the classes to model the cosmetics shop.
-- The **NotImplementedErrors** should give you an idea where to write code.
+_Part 3_
 
-### 2. Category class
-#### Description
-- Minimum category name’s length is 2 symbols and maximum is 15 symbols.
-- `products` property getter should return an immutable collection (tuple)
-- Products in category should be displayed in insertion order
-- When removing product from category, if the product is not found you should raise an error.
-- Category’s `to_string()` should return text in the following format:
+## 1. Description
 
-```
-#Category: {category name}
- #{Name} {Brand}
- #Price: ${price}
- #Gender: {genderType}
- ===
- #{Name} {Brand}
- #Price: ${price}
- #Gender: {genderType}
-```
+**BoardR** is a task-management system which will evolve in the next several weeks. During the course of the project, we will follow the best practices of `Object-Oriented Programming` and `Design`.
 
-```
-#Category: {category name}
- #No products in this category
-```
+## 2. Goals
 
-### 3. Products
-#### Description
-- Minimum product name’s length is 3 symbols and maximum is 10 symbols.
-- Minimum brand name’s length is 2 symbols and maximum is 10 symbols.
-- Price cannot be negative.
-- Gender type can be **"Men"**, **"Women"** or **"Unisex"**. (implemented)
-- Print returns text in the following format: _(you might consider reusing this in the category print.)_
-```
- #{Name} {Brand}
- #Price: ${Price}
- #Gender: {GenderType}
-```
-> Two products with **the same name** are considered equal. (rules for checking whether a product exists in a collection)
+- Practice **Inheritance** - your task will be to further specify the **BoardItem** class into two more specialized classes: **Task** and **Issue**.
+You will achieve this by applying the OOP principle of **Inheritance**.
+- Practice **Polymorphism** and **Duck Typing** - the two concepts are closely related in Python.
+    - Polymorphism - override some of the methods in Task and Issue
+    - Duck Typing - call the same method on a BoardItem object (could be a Task, could be an Issue) and dynamically execute the correct one
+  
+## 3. Task class
 
-### 3. ApplicationData class
-#### Description
-- An instance of this class will hold all application data
-- Attributes 
-   - `products` (collection) 
-   - `categories` (collection)
-   -  `ShoppingCart`
+### Description
 
-- Methods
-    - can create Category/Product. ValueError if category/product with the same name already exists
-    - find - returns Category/Product. ValueError if a category/product with that name does not exist
-    - exists - return bool for whether a product/category with the searched name exists
+Instances of this class will be used to describe work that needs to be done. They extend the functionality of a board item by adding an **assignee** property.
 
- 
+### Initializer
 
-### 4. Shopping cart
-#### Description
-- Adding the same product more than once is allowed.
-- Removing a product from the shopping cart does not throw an error
-- The cart can calculate the total price of all products
-- The cart can check if a product is currently added to it
+- Parameters: `title` (_str_), `assignee` (_str_) and `due_date` (_date_)
+- A new Task should have its initial status as `Todo`
+- Example:
 
-> **Constraint 1** - If a null value is passed to some mandatory property, your program should raise a proper error.  
-> **Constraint 2** - You should only write code in the classes in the models folder and the ApplicationData class
-
-> **Notes** - To simplify your work you are given an already built Engine (for executing some basic operations) and Commands (handle the logic for different operations).
-
-### Input example
-
-```
-CreateProduct MyMan Trashy 10.99 Men
-CreateCategory Shampoos
-AddToCategory Shampoos MyMan
-AddToShoppingCart MyMan
-ShowCategory Shampoos 
-TotalPrice
-RemoveFromCategory Shampoos MyMan
-ShowCategory Shampoos
-RemoveFromShoppingCart MyMan
-TotalPrice
-End
+```python
+task = Task('Test the application flow', 'Steven', add_days_to_now(2))
+print(task.title)      # Test the application flow
+print(task.due_date)   # 2022-03-18
+print(task.status)     # Todo
+print(task.assignee)   # Steven
 ```
 
-### Output Example
+### Properties
+
+- Inherits all props from **BoardItem**
+- `assignee`: _str_, should never be empty, and its length should be between [5..30]
+
+> **Hint**: When you implement the assignee setter, you can think about if there is a way to reuse recording EventLogs functionality from the base class
+>
+> **Hint II** - You will also need to find a way to start from `Todo` status instead of an `Open` status. The easiest approach is to pass the value to the `super()` initializer
+
+### Methods
+
+- Inherits all methods from **BoardItem**
+
+#### Example
+
+```python
+task = Task('Test the application flow', 'Steven', add_days_to_now(2))
+task.advance_status()
+task.advance_status()
+task.assignee = 'Not Steven'
+print(task.history())
+```
+
+#### Output
 
 ```
-Product with name MyMan was created!
-Category with name Shampoos was created!
-Product MyMan added to category Shampoos!
-Product MyMan was added to the shopping cart!
-#Category: Shampoos
- #MyMan Trashy
- #Price: $10.99
- #Gender: Men
-$10.99 total price currently in the shopping cart!
-Product MyMan removed from category Shampoos!
-#Category: Shampoos
- #No products in this category
-Product MyMan was removed from the shopping cart!
-No products in shopping cart!
+[03/16/2022, 16:52:07] Task created: Test the application flow, [Todo | 2022-03-18]
+[03/16/2022, 16:52:07] Status changed from Todo to In progress
+[03/16/2022, 16:52:07] Status changed from In progress to Done
+[03/16/2022, 16:52:07] Assignee changed from Steven to Not Steven
 ```
 
-> **Hint**: You don't need to take care of the Engine class, the CommandFactory class, the Main method, and the Commands but you can understand how they work
+## 4. Issue class
 
->You are given a template of the Cosmetics shop. Please take a look at it carefully before you try to do anything. Try to understand all the classes and how they are supposed to interact with each other.
+### Description
 
-### Unit Tests
+Instances of this class will be used to describe a problem that needs attention. Their status will start at `OPEN`.
 
-- You have been given unit tests to keep track off your progress. Run them from the Testing explorer in the nav menu in VSCode
-- Should you get stuck, check out the tests' names to guide you what you should do.
+### Initializer
 
-## Step by step guide
+- Parameters: `title` (_str_), `description` (_str_), dueDate (_date_)
+- A new Issue should have its initial status as Open
+- Example:
 
-> *Hint: Run the tests whenever you finish a task to check if it's implemented correctly.*
+```python
+issue = Issue('App flow tests?', 'We need to test the flow!', add_days_to_now(1))
+print(issue.description) # We need to test the flow!
+```
 
-1. Start with the `Product` class
-   - Apply the Encapsulation principle to all the attributes (make sure all fields are private (by convention), add provide properties for them).
+### Properties
 
-1. Navigate to the `ApplicationData` class
+- Inherit all properties from BoardItem
+  `description`: _str_ - if someone tries to assign an empty string to it, set to `No description`
+  - Description can't be changed once set.
 
-    - Implement the `find` methods - they should go through the respective collections and return the item that has the given name. What should happen if there is no item with that name? Maybe throw an exception?
-    - Implement the `create` methods - they accept the needed arguments to create a category or a product.
-    - Implement the `exists` methods - they go through the respective collections and return `true` if there is an item that has the given name.
+### Methods
 
-1. Finish the `ShoppingCart` class
+- Inherits all methods from BoardItem
 
-    - Encapsulate it (don't allow direct access to it).
-    - Initialize the `products` collection.
+#### Example
+
+```python
+issue = Issue('App flow tests?', 'We need to test the flow!', add_days_to_now(1))
+issue.advance_status()
+issue.due_date += timedelta(days = 1)
+print(issue.history())
+```
+
+#### Output
+
+```
+[03/16/2022, 16:56:02] Issue created: App flow tests?, [Open | 2022-03-17]
+[03/16/2022, 16:56:02] Status changed from Open to Todo
+[03/16/2022, 16:56:02] DueDate changed from 2022-03-17 to 2022-03-18
+```
+## 5. Override BoardItem.info()
+
+### Description
+
+We will create separate `.info()` methods in Task and Issue. The one in task will provide additional information about the `assignee`, and the one in Issue will also display the `description`. We will enhance the base info the following way.
+- task.info = asignee + super.info
+- issue.info = description + super.info
+- super.info is the info method defined in the base class
+- sample code in `Issue`:
+    ```python
+    def info(self):
+        board_item_info = super().info() # obtain base class information
+        
+        return # Issue + description + board item info 
+    ```
+- to the same in Task class, but display `Task + assignee + board item info` instead
+- **IMPORTANT NOTE**: if the initializer of the BoardItem class uses the `.info` method, you could run into troubles
+    1. it will call the overriden `info` - the one that uses either `description` or `assignee` properties
+    1. when it calls the overriden `info`, the initializer for `Task` and `Issue` have not yet executed
+    1. so neither `description`, nor `assignee` exists at this point in time
+    1. but the overriden `info` uses one of them ...
+    1. ...
+    1. **Runtime Error!**
+    1. Remember, **be mindful if you use methods from the same class in an initializer**. Some other derived class may override them and cause problems.
+
+- Run the following code in the main file:
 
     ```python
-    def __init__(self):
-        self._products = []
+    issue = Issue('App flow tests?', 'We need to test the flow!', add_days_to_now(1))
+    task = Task('Dont refactor anything', 'Pesho', add_days_to_now(2))
+
+    print(issue.info())
+    print(task.info())
+    ```
+- If everything is ok, this is the expected output:
+    ```none
+    Issue (We need to test the flow!) App flow tests?, [Open | 2022-03-26]
+    Task (assigned to: Pesho) Dont refactor anything, [Todo | 2022-03-27]
     ```
 
-    - Implement the methods that add or remove products from the collection.
+We also saw **Duck Typing** in action - the call to the `.info` from either `task` or `issue` objects.  
+The **Duck Typing** will be much more obvious, if we rewrite the code like this - there will be no change in the output.
+```python
+issue = Issue('App flow tests?', 'We need to test the flow!', add_days_to_now(1))
+task = Task('Dont refactor anything', 'Pesho', add_days_to_now(2))
 
-1. Finish the `Category` class
+for board_item in [issue, task]:
+    print(board_item.info()) # prints info like either an issue, or a task
+```
 
-   - Initialize the collection.
-   - Implement the methods that add or remove products from the collection.
 
-1. Implement `to_string()` methods in both the `Category` and `Product` classes.
+## 6. Board class
 
-   - To test the `to_string()` method you need to run the application, pass the sample input and check the output.
-   - There is also a unit test for the `product.to_string()` which you can use
+The board class should continue to work as before without any changes.
 
+In the next part of the project we will learn how the Board class will deal with two different types (Issue / Task) in an **abstract** way by focusing on the common attributes/methods that both classes possess.
