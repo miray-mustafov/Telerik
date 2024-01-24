@@ -1,8 +1,9 @@
 from datetime import date, timedelta
-from board import Board
-from issue import Issue
-from task import Task
-from user import User
+from board_items.issue import Issue
+from board_items.task import Task
+from boards.board import Board
+from boards.editable_board import EditableBoard
+from boards.readonly_board import ReadonlyBoard
 
 
 def add_days_to_now(d):
@@ -35,3 +36,8 @@ peter.advance_task_status(task1)
 print(task1.status)
 print(f"Capacity of the team: {board.team_capacity}")
 print(task1.history())
+
+# todo check
+print()
+print(f'for the team capacity difference. {steven.capacity} + {peter.capacity} = 4 not 5')
+print('Assignee Steven cannot be changed from Steven to Steven')

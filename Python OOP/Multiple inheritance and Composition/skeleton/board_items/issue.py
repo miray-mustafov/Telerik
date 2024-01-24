@@ -1,12 +1,12 @@
-from board_item import BoardItem
 from datetime import date
-from item_status import ItemStatus
+from board_items.board_item import BoardItem
+from board_items.item_status import ItemStatus
 
 
 class Issue(BoardItem):
     def __init__(self, title: str, description: str, due_date: date):
-        super().__init__(title, due_date, ItemStatus.OPEN)
         self._description = description if description else 'No description'
+        super().__init__(title, due_date, ItemStatus.OPEN)
 
     @property
     def description(self):

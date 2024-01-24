@@ -1,10 +1,10 @@
-from board_item import BoardItem
-from user import User
-from task import Task
-from item_status import ItemStatus
+from board_items.board_item import BoardItem
+from users.user import User
+from board_items.task import Task
+from board_items.item_status import ItemStatus
 
 
-class Board:
+class Board():
     def __init__(self):
         self._items = []
         self._users = []

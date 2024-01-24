@@ -1,10 +1,10 @@
-from board_item import BoardItem
+from board_items.board_item import BoardItem
+from board_items.item_status import ItemStatus
 from datetime import date
-from item_status import ItemStatus
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from user import User
+    from users.user import User
 
 
 class Task(BoardItem):

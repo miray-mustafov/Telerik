@@ -2,9 +2,9 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from task import Task
+    from board_items.task import Task
 
-from item_status import ItemStatus
+from board_items.item_status import ItemStatus
 
 
 class User:
