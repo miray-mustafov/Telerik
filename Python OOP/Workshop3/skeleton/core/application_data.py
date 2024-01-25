@@ -1,5 +1,5 @@
 from typing import List
-
+from models.constants.test_result import TestResult
 from models.test_group import TestGroup
 from models.test import Test
 from models.test_run import TestRun
@@ -12,54 +12,89 @@ class ApplicationData:
         self._test_runs: List[TestRun] = []  # !
 
     @property
-    def groups(self):
+    def test_groups(self):
         return tuple(self._test_groups)
 
-    def create_and_add_trun_to_test(self, test_id, test_result, runtime_ms):  # !
-        for tst in self._tests:
-            if tst.id == test_id:
-                trun = TestRun(test_id, test_result, runtime_ms)
-                tst.add_test_run(trun)
-                self._test_runs.append(trun)
-                return
-        raise ValueError(f'Test with id:{test_id} doesn\'t exist in the application data!')
+    @property
+    def tests(self):
+        return tuple(self._tests)
 
-    def create_and_add_test_to_tgroup(self, tgroup_id, descrp):  # !
+    @property
+    def test_runs(self):
+        return tuple(self._test_runs)
+
+    def find_testgroup_by_id(self, tgroup_id):
         for tgroup in self._test_groups:
             if tgroup.id == tgroup_id:
-                tst = Test(tgroup_id, descrp)
-                tgroup.add_test(tst)
-                self._tests.append(tst)
+                return tgroup
+        raise ValueError(f"Testgroup id:{tgroup_id} not found!")
+
+    def find_test_by_id(self, test_id):
+        for tst in self._tests:
+            if tst.id == test_id:
                 return tst
-        raise ValueError(f"Test group with id:{tgroup_id} doesn\'t exist in the application data!")
+        raise ValueError(f"Test id:{test_id} not found!")
+
+    def create_and_add_trun_to_test(self, test_id, test_result, runtime_ms):  # !
+        tst = self.find_test_by_id(test_id)
+        trun = TestRun(test_id, test_result, runtime_ms)
+        tst.add_test_run(trun)
+        self._test_runs.append(trun)
+        return
+
+    def create_and_add_test_to_tgroup(self, tgroup_id, descrp):  # !
+        tgroup = self.find_testgroup_by_id(tgroup_id)
+        tst = Test(tgroup_id, descrp)
+        tgroup.add_test(tst)
+        self._tests.append(tst)
+        return tst
 
     def add_testgroup(self, name):
         tgroup = TestGroup(name)
         self._test_groups.append(tgroup)
         return tgroup
 
-    def find_testgroup_by_id(self, tgroup_id):
-        pass
+    def remove_group_by_id(self, tgroup_id):
+        tgroup_to_remove = self.find_testgroup_by_id(tgroup_id)
+        tests_to_remove = tgroup_to_remove._tests
 
-    def remove_testgroup_by_id(self, tgroup_id):
-        pass
+        for tst in tests_to_remove:  # accessing all truns
+            for trun in tst._test_runs:
+                self._test_runs.remove(trun)  # clean references to the specified truns from appdata
+        for tst in tests_to_remove:  # access all tests
+            self._tests.remove(tst)  # clean them one by one from app data
+        self._test_groups.remove(tgroup_to_remove)  # removing the group from appdata
 
-    def find_test_by_id(self, test_id):
-        pass
+        del tests_to_remove
+        del tgroup_to_remove
 
-    def remove_group(self, tgroup_id):
-        try:
-            tgroup_to_remove = [x for x in self._test_groups if x.id == tgroup_id][0]
-            tests_to_remove = tgroup_to_remove._tests
+    def report_test(self, test_id):
+        tst: Test = self.find_test_by_id(test_id)
+        runs_count, passing, failing, total_runtime = len(tst.test_runs), 0, 0, 0
+        res = f'#{tst.id}. [{tst.description}]: {runs_count} runs'
+        for trun in tst.test_runs:
+            if trun.test_result == TestResult.PASS:
+                passing += 1
+            elif trun.test_result == TestResult.FAIL:
+                failing += 1
+            total_runtime += trun.runtime_ms
+        res += f'\n- Passing: {passing}'
+        res += f'\n- Failing: {failing}'
+        res += f'\n- Total runtime: {total_runtime}ms'
+        res += f'\n- Average runtime: {total_runtime / runs_count:.1f}ms'
+        return res
 
-            for tst in tests_to_remove:  # accessing all truns
-                for trun in tst._test_runs:
-                    self._test_runs.remove(trun)  # clean references to the specified truns from appdata
-            for tst in tests_to_remove:  # access all tests
-                self._tests.remove(tst)  # clean them one by one from app data
-            self._test_groups.remove(tgroup_to_remove)  # removing the group from appdata
+    def view_group(self, tgroup_id):
+        tgroup = self.find_testgroup_by_id(tgroup_id)
+        res = f'#{tgroup.id}. {tgroup.name} ({len(tgroup.tests)} tests)'
+        for tst in tgroup.tests:
+            res += f"\n  #{tst.id}. [{tst.description}]: {len(tst.test_runs)} runs"
 
-            del tests_to_remove
-            del tgroup_to_remove
-        except:
-            raise ValueError(f'Test Group with id:{tgroup_id} doesn\'t exist in the application data!')
+        return res
+
+    def view_system(self):
+        res = f'Test Reporter System ({len(self._test_groups)} test groups)'
+        for tgroup in self.test_groups:
+            res += f"\n  #{tgroup.id}. {tgroup.name} ({len(tgroup.tests)} tests)"
+
+        return res
