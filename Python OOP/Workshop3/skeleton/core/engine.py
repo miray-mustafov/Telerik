@@ -7,4 +7,13 @@ class Engine:
         self._command_factory = factory
 
     def start(self):
-        raise NotImplementedError()
+        output = []
+        while True:
+            input_line = input()
+            if input_line.lower() == 'end':
+                break
+
+            command = self._command_factory.create(input_line)
+            output.append(command.execute())
+
+        print('\n'.join(output))

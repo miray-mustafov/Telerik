@@ -1,8 +1,9 @@
+from typing import List
 from core.application_data import ApplicationData
 
 
 class BaseCommand():
-    def __init__(self, params: list[str], app_data: ApplicationData):
+    def __init__(self, params: List[str], app_data: ApplicationData):
         self._params = params
         self._app_data = app_data
 
@@ -15,5 +16,4 @@ class BaseCommand():
         return self._app_data
 
     def execute(self):
-        # override in derived classes
-        return ""
+        return "must be overriden"
