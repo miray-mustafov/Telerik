@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, TYPE_CHECKING
 
 from models.test import Test
 

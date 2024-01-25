@@ -46,3 +46,20 @@ class ApplicationData:
 
     def find_test_by_id(self, test_id):
         pass
+
+    def remove_group(self, tgroup_id):
+        try:
+            tgroup_to_remove = [x for x in self._test_groups if x.id == tgroup_id][0]
+            tests_to_remove = tgroup_to_remove._tests
+
+            for tst in tests_to_remove:  # accessing all truns
+                for trun in tst._test_runs:
+                    self._test_runs.remove(trun)  # clean references to the specified truns from appdata
+            for tst in tests_to_remove:  # access all tests
+                self._tests.remove(tst)  # clean them one by one from app data
+            self._test_groups.remove(tgroup_to_remove)  # removing the group from appdata
+
+            del tests_to_remove
+            del tgroup_to_remove
+        except:
+            raise ValueError(f'Test Group with id:{tgroup_id} doesn\'t exist in the application data!')
