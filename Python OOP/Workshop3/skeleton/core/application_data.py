@@ -50,7 +50,7 @@ class ApplicationData:
         return tst
 
     def add_testgroup(self, name):
-        tgroup = TestGroup(name)
+        tgroup: TestGroup = TestGroup(name)
         self._test_groups.append(tgroup)
         return tgroup
 
@@ -81,7 +81,11 @@ class ApplicationData:
         res += f'\n- Passing: {passing}'
         res += f'\n- Failing: {failing}'
         res += f'\n- Total runtime: {total_runtime}ms'
-        res += f'\n- Average runtime: {total_runtime / runs_count:.1f}ms'
+        if not runs_count:
+            avg = 0
+        else:
+            avg = total_runtime / runs_count
+        res += f'\n- Average runtime: {avg:.1f}ms'
         return res
 
     def view_group(self, tgroup_id):
