@@ -1,6 +1,10 @@
 from models.comment import Comment
 from models.constants.user_role import UserRole
 from core import validate
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from vehicle import Vehicle
 
 
 class User:
@@ -76,3 +80,45 @@ class User:
     def comments(self):
         return tuple(self._comments)
 
+    def add_vehicle(self, vehicle: 'Vehicle'):  # ?
+        if self.is_admin:
+            raise ValueError(User.ADMIN_CANNOT_ADD_VEHICLES_ERR)
+        elif self.user_role == UserRole.NORMAL and len(self.vehicles) == User.NORMAL_ROLE_VEHICLE_LIMIT:
+            raise ValueError(User.NORMAL_USER_LIMIT_REACHED_ERR)
+        self._vehicles.append(vehicle)
+
+    def get_vehicle(self, index: int):
+        if index >= len(self.vehicles):
+            raise ValueError('The vehicle does not exist!')
+        return self._vehicles[index]
+
+    def remove_vehicle(self, vehicle: 'Vehicle'):
+        if vehicle in self._vehicles:
+            self._vehicles.remove(vehicle)
+
+    # todo
+    def add_comment(self, content: str, vehicle: 'Vehicle'):
+        cmnt = Comment(content, self.username)
+        vehicle.add_comment(cmnt)
+
+    # todo
+    def remove_comment(self, comment: 'Comment', vehicle: 'Vehicle'):
+        if self.username == comment.author:
+            vehicle.remove_comment(comment)
+            return
+        raise ValueError('You are not the author of the comment you are trying to remove!')
+
+    def print_vehicles(self):
+        res = [f'--USER {self.username}--']
+        if not self._vehicles:
+            vehicles_msg = ['--NO VEHICLES--']
+        else:
+            vehicles_msg = []
+            for i, vhcl in enumerate(self._vehicles):
+                vehicles_msg.append(f'{i + 1}. {vhcl}')
+
+        res.extend(vehicles_msg)
+        return '\n'.join(res)
+
+    def __str__(self):
+        return f'Username: {self.username}, FullName: {self.firstname} {self.lastname}, Role: {self.user_role}'

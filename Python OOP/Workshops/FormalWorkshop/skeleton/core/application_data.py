@@ -43,3 +43,10 @@ class ApplicationData:
 
     def logout(self):
         self._logged_user = None
+
+    # def show_users(self):
+    #     res = '\n'.join([
+    #         '--USERS--',
+    #         '1. fake user str',
+    #         '2. fake user str'
+    #     ])

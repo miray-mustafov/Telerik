@@ -49,12 +49,12 @@ class Vehicle:
 
     def get_comment(self, index):  # searches by indx
         if index >= len(self._comments):
-            raise ValueError('Invalid index!')
+            raise ValueError('There is no comment on this index.')
         return self._comments[index]
 
     def remove_comment(self, comment: 'Comment'):
         if comment in self._comments:
             self._comments.remove(comment)
 
-    def __str__(self):
+    def __str__(self):  # todo
         raise NotImplementedError('must be overriden')
