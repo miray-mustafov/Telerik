@@ -8,7 +8,7 @@ class Motorcycle_Should(unittest.TestCase):
     def test_init_setProperties(self):
         # Arrange & Act
         motorcycle = Motorcycle(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_CATEGORY)
+                                td.VALID_PRICE, td.VALID_CATEGORY)
 
         # Assert
         self.assertEqual(td.VALID_MAKE, motorcycle.make)
@@ -53,7 +53,7 @@ class Motorcycle_Should(unittest.TestCase):
     def test_addcomment_addsComment(self):
         # Arrange
         motorcycle = Motorcycle(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_CATEGORY)
+                                td.VALID_PRICE, td.VALID_CATEGORY)
         comment = Mock()
 
         # Act
@@ -65,7 +65,7 @@ class Motorcycle_Should(unittest.TestCase):
     def test_getComment_returnsCorrectly(self):
         # Arrange
         motorcycle = Motorcycle(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_CATEGORY)
+                                td.VALID_PRICE, td.VALID_CATEGORY)
         comment = Mock()
         motorcycle.add_comment(comment)
 
@@ -78,7 +78,7 @@ class Motorcycle_Should(unittest.TestCase):
     def test_getComment_raisesError_invalidIndex(self):
         # Arrange
         motorcycle = Motorcycle(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_CATEGORY)
+                                td.VALID_PRICE, td.VALID_CATEGORY)
         comment = Mock()
         motorcycle.add_comment(comment)
 
@@ -89,7 +89,7 @@ class Motorcycle_Should(unittest.TestCase):
     def test_removecomment_removesCorrectly(self):
         # Arrange
         motorcycle = Motorcycle(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_CATEGORY)
+                                td.VALID_PRICE, td.VALID_CATEGORY)
         comment = Mock()
         motorcycle.add_comment(comment)
 
@@ -102,7 +102,7 @@ class Motorcycle_Should(unittest.TestCase):
     def test_removecomment_doesNothing_whenCommentDoesNotExist(self):
         # Arrange
         motorcycle = Motorcycle(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_CATEGORY)
+                                td.VALID_PRICE, td.VALID_CATEGORY)
         comment = Mock()
         motorcycle.add_comment(comment)
 
@@ -124,7 +124,7 @@ class Motorcycle_Should(unittest.TestCase):
             '--NO COMMENTS--'
         ])
         motorcycle = Motorcycle(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_CATEGORY)
+                                td.VALID_PRICE, td.VALID_CATEGORY)
 
         # Act
         stringified = str(motorcycle)
@@ -147,7 +147,7 @@ class Motorcycle_Should(unittest.TestCase):
             '--COMMENTS--'
         ])
         motorcycle = Motorcycle(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_CATEGORY)
+                                td.VALID_PRICE, td.VALID_CATEGORY)
         comment = Mock()
         comment.__str__ = lambda _: this_is_fake_news
         motorcycle.add_comment(comment)

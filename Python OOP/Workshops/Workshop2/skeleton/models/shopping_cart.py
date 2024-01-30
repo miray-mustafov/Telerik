@@ -22,4 +22,4 @@ class ShoppingCart:
         return product.name in [p.name for p in self._products]
 
     def total_price(self):
-        return sum((p.price for p in self._products))
+        return sum((p.intval for p in self._products))

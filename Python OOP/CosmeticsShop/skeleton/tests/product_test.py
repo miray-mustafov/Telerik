@@ -30,7 +30,7 @@ class Product_Should(unittest.TestCase):
         product = Product(VALID_NAME, VALID_BRAND, VALID_PRICE, VALID_GENDER)
         self.assertEqual(VALID_NAME, product.name)
         self.assertEqual(VALID_BRAND, product.brand)
-        self.assertEqual(VALID_PRICE, product.price)
+        self.assertEqual(VALID_PRICE, product.intval)
         self.assertEqual(VALID_GENDER, product.gender)
 
     def test_toString_returnsCorrectlyFormattedString(self):

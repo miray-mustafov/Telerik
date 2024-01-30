@@ -32,7 +32,7 @@ class Toothpaste_Should(unittest.TestCase):
         toothpaste = Toothpaste(VALID_NAME, VALID_BRAND, VALID_PRICE, VALID_GENDER, [])
         self.assertEqual(VALID_NAME, toothpaste.name)
         self.assertEqual(VALID_BRAND, toothpaste.brand)
-        self.assertEqual(VALID_PRICE, toothpaste.price)
+        self.assertEqual(VALID_PRICE, toothpaste.intval)
         self.assertEqual(VALID_GENDER, toothpaste.gender)
         self.assertIsInstance(toothpaste.ingredients, tuple)
 

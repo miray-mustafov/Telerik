@@ -19,4 +19,4 @@ class ShoppingCart:
         return product in self._products
 
     def total_price(self):
-        return sum(x.price for x in self._products)
+        return sum(x.intval for x in self._products)

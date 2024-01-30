@@ -1,9 +1,12 @@
-    class Scent:
+class Scent:
+
+
     LAVENDER = 'lavender'
     VANILLA = 'vanilla'
     ROSE = 'rose'
 
     allowed_scents = [LAVENDER, VANILLA, ROSE]
+
 
     @classmethod
     def check_scent(cls, cur_scent):

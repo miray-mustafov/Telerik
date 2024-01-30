@@ -1,21 +1,39 @@
-class Truck:
-    MAKE_LEN_MIN = 2
-    MAKE_LEN_MAX = 15
-    MAKE_LEN_ERR = f'Make must be between {MAKE_LEN_MIN} and {MAKE_LEN_MAX} characters long!'
+from models.vehicle import Vehicle
+from core import validate
 
-    MODEL_LEN_MIN = 1
-    MODEL_LEN_MAX = 15
-    MODEL_LEN_ERR = f'Model must be between {MODEL_LEN_MIN} and {MODEL_LEN_MAX} characters long!'
 
-    PRICE_MIN = 0
-    PRICE_MAX = 1000000
-    PRICE_ERR = f'Price must be between {PRICE_MIN:.1f} and {PRICE_MAX:.2f}!'
-
+class Truck(Vehicle):
     WEIGHT_CAP_MIN = 1
     WEIGHT_CAP_MAX = 100
     WEIGHT_CAP_ERR = f'Weight capacity must be between {WEIGHT_CAP_MIN} and {WEIGHT_CAP_MAX}!'
 
     WHEELS_COUNT = 8
 
-    # Todo: Finish the implementation
-    # Names of methods/attributes should be exactly match those in the README file
+    def __init__(self, make, model, price, weight_capacity):
+        self._weight_capacity = validate.intval(weight_capacity, Truck.WEIGHT_CAP_MIN, Truck.WEIGHT_CAP_MAX,
+                                                Truck.WEIGHT_CAP_ERR)
+        super().__init__(make, model, price)
+
+    @property
+    def weight_capacity(self):
+        return self._weight_capacity
+
+    def __str__(self):
+        res = [
+            'Truck:',
+            f'Make: {self.make}',
+            f'Model: {self.model}',
+            f'Wheels: {self.wheels}',
+            f'Price: ${self.price:.2f}',
+            f'Weight Capacity: {self.weight_capacity}t',
+        ]
+        if not self.comments:
+            comments_msg = ['--NO COMMENTS--']
+        else:
+            comments_msg = ['--COMMENTS--', ]
+            for c in self.comments:
+                comments_msg.append(str(c))
+            comments_msg.append('--COMMENTS--')
+
+        res.extend(comments_msg)
+        return '\n'.join(res)
