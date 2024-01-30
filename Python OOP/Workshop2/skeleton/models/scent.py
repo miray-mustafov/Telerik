@@ -1,4 +1,4 @@
-class Scent:
+    class Scent:
     LAVENDER = 'lavender'
     VANILLA = 'vanilla'
     ROSE = 'rose'
