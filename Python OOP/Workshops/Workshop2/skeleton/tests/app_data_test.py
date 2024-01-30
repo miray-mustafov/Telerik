@@ -49,7 +49,7 @@ class ApplicationData_Should(unittest.TestCase):
 
         # Act
         shampoo = data.create_shampoo(shampoo_test.VALID_NAME, shampoo_test.VALID_BRAND, shampoo_test.VALID_PRICE,
-                            shampoo_test.VALID_GENDER, shampoo_test.VALID_USAGE_TYPE, shampoo_test.VALID_MILLILITERS)
+                                      shampoo_test.VALID_GENDER, shampoo_test.VALID_USAGE_TYPE, shampoo_test.VALID_MILLILITERS)
 
 
         # Assert
@@ -62,7 +62,7 @@ class ApplicationData_Should(unittest.TestCase):
 
         # Act
         toothpaste = data.create_toothpaste(toothpaste_test.VALID_NAME, toothpaste_test.VALID_BRAND, toothpaste_test.VALID_PRICE,
-                            toothpaste_test.VALID_GENDER, toothpaste_test.TEST_INGREDIENTS)
+                                            toothpaste_test.VALID_GENDER, toothpaste_test.TEST_INGREDIENTS)
 
 
         # Assert
@@ -89,7 +89,7 @@ class ApplicationData_Should(unittest.TestCase):
         # Arrange
         data = ApplicationData()
         data.create_toothpaste(toothpaste_test.VALID_NAME, toothpaste_test.VALID_BRAND, toothpaste_test.VALID_PRICE,
-                            toothpaste_test.VALID_GENDER, toothpaste_test.TEST_INGREDIENTS)
+                               toothpaste_test.VALID_GENDER, toothpaste_test.TEST_INGREDIENTS)
 
         # Act
         product = data.find_product_by_name(toothpaste_test.VALID_NAME)
