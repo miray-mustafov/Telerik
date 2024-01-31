@@ -19,14 +19,8 @@ class Motorcycle(Vehicle):
         return self._category
 
     def __str__(self):
-        res = [
-            'Motorcycle:',
-            f'Make: {self.make}',
-            f'Model: {self.model}',
-            f'Wheels: {self.wheels}',
-            f'Price: ${self.price:.2f}',
-            f'Category: {self.category}',
-        ]
+        res = super().__str__()
+        res.append(f'Category: {self.category}')
         if not self.comments:
             comments_msg = ['--NO COMMENTS--']
         else:

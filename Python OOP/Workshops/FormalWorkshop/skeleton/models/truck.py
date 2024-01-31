@@ -19,14 +19,8 @@ class Truck(Vehicle):
         return self._weight_capacity
 
     def __str__(self):
-        res = [
-            'Truck:',
-            f'Make: {self.make}',
-            f'Model: {self.model}',
-            f'Wheels: {self.wheels}',
-            f'Price: ${self.price:.2f}',
-            f'Weight Capacity: {self.weight_capacity}t',
-        ]
+        res = super().__str__()
+        res.append(f'Weight Capacity: {self.weight_capacity}t')
         if not self.comments:
             comments_msg = ['--NO COMMENTS--']
         else:

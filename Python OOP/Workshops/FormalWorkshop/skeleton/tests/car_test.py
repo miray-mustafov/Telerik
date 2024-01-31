@@ -8,7 +8,7 @@ class Car_Should(unittest.TestCase):
     def test_init_setProperties(self):
         # Arrange & Act
         car = Car(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_SEATS)
+                  td.VALID_PRICE, td.VALID_SEATS)
 
         # Assert
         self.assertEqual(td.VALID_MAKE, car.make)
@@ -53,7 +53,7 @@ class Car_Should(unittest.TestCase):
     def test_addcomment_addsComment(self):
         # Arrange
         car = Car(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_SEATS)
+                  td.VALID_PRICE, td.VALID_SEATS)
         comment = Mock()
 
         # Act
@@ -65,7 +65,7 @@ class Car_Should(unittest.TestCase):
     def test_getComment_returnsCorrectly(self):
         # Arrange
         car = Car(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_SEATS)
+                  td.VALID_PRICE, td.VALID_SEATS)
         comment = Mock()
         car.add_comment(comment)
 
@@ -78,7 +78,7 @@ class Car_Should(unittest.TestCase):
     def test_getComment_raisesError_invalidIndex(self):
         # Arrange
         car = Car(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_SEATS)
+                  td.VALID_PRICE, td.VALID_SEATS)
         comment = Mock()
         car.add_comment(comment)
 
@@ -89,7 +89,7 @@ class Car_Should(unittest.TestCase):
     def test_removecomment_removesCorrectly(self):
         # Arrange
         car = Car(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_SEATS)
+                  td.VALID_PRICE, td.VALID_SEATS)
         comment = Mock()
         car.add_comment(comment)
 
@@ -102,7 +102,7 @@ class Car_Should(unittest.TestCase):
     def test_removecomment_doesNothing_whenCommentDoesNotExist(self):
         # Arrange
         car = Car(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_SEATS)
+                  td.VALID_PRICE, td.VALID_SEATS)
         comment = Mock()
         car.add_comment(comment)
 
@@ -124,7 +124,7 @@ class Car_Should(unittest.TestCase):
             '--NO COMMENTS--'
         ])
         car = Car(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_SEATS)
+                  td.VALID_PRICE, td.VALID_SEATS)
 
         # Act
         stringified = str(car)
@@ -147,7 +147,7 @@ class Car_Should(unittest.TestCase):
             '--COMMENTS--'
         ])
         car = Car(td.VALID_MAKE, td.VALID_MODEL,
-                      td.VALID_PRICE, td.VALID_SEATS)
+                  td.VALID_PRICE, td.VALID_SEATS)
         comment = Mock()
         comment.__str__ = lambda _: this_is_fake_news
         car.add_comment(comment)

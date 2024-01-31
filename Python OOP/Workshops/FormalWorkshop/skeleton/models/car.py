@@ -18,14 +18,8 @@ class Car(Vehicle):
         return self._seats
 
     def __str__(self):
-        res = [
-            'Car:',
-            f'Make: {self.make}',
-            f'Model: {self.model}',
-            f'Wheels: {self.wheels}',
-            f'Price: ${self.price:.2f}',
-            f'Seats: {self.seats}',
-        ]
+        res = super().__str__()
+        res.append(f'Seats: {self.seats}')
         if not self.comments:
             comments_msg = ['--NO COMMENTS--']
         else:

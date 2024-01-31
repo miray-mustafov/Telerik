@@ -56,5 +56,12 @@ class Vehicle:
         if comment in self._comments:
             self._comments.remove(comment)
 
-    def __str__(self):  # todo
-        raise NotImplementedError('must be overriden')
+    def __str__(self):
+        res = [
+            f'{type(self).__name__}:',
+            f'Make: {self.make}',
+            f'Model: {self.model}',
+            f'Wheels: {self.wheels}',
+            f'Price: ${self.price:.2f}',
+        ]
+        return res
