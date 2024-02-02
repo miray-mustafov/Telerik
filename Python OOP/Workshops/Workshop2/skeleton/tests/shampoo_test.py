@@ -40,7 +40,7 @@ class Shampoo_Should(unittest.TestCase):
         shampoo = Shampoo(VALID_NAME, VALID_BRAND, VALID_PRICE, VALID_GENDER, VALID_USAGE_TYPE, VALID_MILLILITERS)
         self.assertEqual(VALID_NAME, shampoo.name)
         self.assertEqual(VALID_BRAND, shampoo.brand)
-        self.assertEqual(VALID_PRICE, shampoo.price)
+        self.assertEqual(VALID_PRICE, shampoo.intval)
         self.assertEqual(VALID_GENDER, shampoo.gender)
         self.assertEqual(VALID_MILLILITERS, shampoo.milliliters)
         self.assertEqual(VALID_USAGE_TYPE, shampoo.usage_type)

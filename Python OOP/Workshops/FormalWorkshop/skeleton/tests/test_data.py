@@ -1,7 +1,6 @@
 # vehicles
 from models.constants.user_role import UserRole
 
-
 VALID_MAKE = 'TestMake'
 VALID_MODEL = 'TestModel'
 VALID_PRICE = 300.0

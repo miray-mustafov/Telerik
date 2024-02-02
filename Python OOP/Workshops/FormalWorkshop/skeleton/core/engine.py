@@ -1,4 +1,3 @@
-
 from core.command_factory import CommandFactory
 
 
