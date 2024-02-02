@@ -192,6 +192,7 @@ class User_Should(unittest.TestCase):
 
         def fake_vehicle_add(comment):
             fake_vehicle.comments = [comment]
+
         fake_vehicle.add_comment = fake_vehicle_add
         fake_news = 'fake_news'
 
@@ -210,6 +211,7 @@ class User_Should(unittest.TestCase):
 
         def fake_vehicle_remove(comment):
             fake_vehicle.comments.remove(comment)
+
         fake_vehicle.remove_comment = fake_vehicle_remove
         fake_comment = Mock()
         fake_comment.author = td.VALID_USERNAME
@@ -229,6 +231,7 @@ class User_Should(unittest.TestCase):
 
         def fake_vehicle_remove(comment):
             fake_vehicle.comments.remove(comment)
+
         fake_vehicle.remove_comment = fake_vehicle_remove
         fake_comment = Mock()
         fake_comment.author = 'Another Author'

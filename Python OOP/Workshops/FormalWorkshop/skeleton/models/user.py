@@ -1,6 +1,7 @@
 from models.comment import Comment
 from models.constants.user_role import UserRole
 
+
 class User:
     USERNAME_LEN_MIN = 2
     USERNAME_LEN_MAX = 20
@@ -27,5 +28,4 @@ class User:
     YOU_ARE_NOT_THE_AUTHOR = 'You are not the author of the comment you are trying to remove!'
     THE_VEHICLE_DOES_NOT_EXIT = 'The vehicle does not exist!'
 
-    # Todo: Finish the implementation
-    # Names of methods/attributes should be exactly match those in the README file
+    def __init__(self, username, firstname, lastname, password, user_role, is_admin, vehicles):

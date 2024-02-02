@@ -9,14 +9,14 @@ class Engine:
     def start(self):
         output = []
         while True:
-            try:
+            # try:
                 input_line = input()
                 if input_line.lower() == 'end':
                     break
 
                 output.append(self._process_command(input_line))
-            except ValueError as err:
-                output.append(err.args[0])
+            # except ValueError as err:
+            #     output.append(err.args[0])
 
         print('\n####################\n'.join(output))
 
