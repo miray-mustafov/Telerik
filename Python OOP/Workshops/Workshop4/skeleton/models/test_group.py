@@ -32,3 +32,4 @@ class TestGroup:
 
     def __str__(self):
         return f'#{self.id}. {self.name} ({len(self.tests)} tests)'
+

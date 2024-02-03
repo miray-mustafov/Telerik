@@ -27,12 +27,12 @@ class ModelsFactory:
             test_result = TestResult(test_result_raw)
         except ValueError:
             raise ApplicationError(
-                'Invalid value for TestResult: {test_result_raw}')
+                f'Invalid value for TestResult: {test_result_raw}')
 
         try:
             runtime_ms = int(runtime_ms_raw)
         except ValueError:
             raise ApplicationError(
-                '{runtime_ms_raw} is not a valid integer')
+                f'{runtime_ms_raw} is not a valid integer')
 
         return TestRun(test_result, runtime_ms)
