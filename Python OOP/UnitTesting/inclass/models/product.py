@@ -6,7 +6,7 @@ class Product:
         self.name = name
         self.brand = brand
         self.price = price
-        self._gender = gender
+        self._gender = Gender(gender)
 
     @property
     def name(self):
@@ -44,7 +44,7 @@ class Product:
 
     @property
     def gender(self):
-        return self._gender
+        return self._gender.value
 
     def to_string(self):
         return '\n'.join([
@@ -53,3 +53,6 @@ class Product:
             f' #Gender: {self.gender.value}',
             ' ==='
         ])
+
+
+
