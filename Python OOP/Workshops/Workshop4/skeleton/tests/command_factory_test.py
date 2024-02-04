@@ -12,6 +12,7 @@ from core.application_data import ApplicationData
 from commands.add_test import AddTestCommand
 from core.models_factory import ModelsFactory
 from errors.application_error import ApplicationError
+from core.models_factory import ModelsFactory
 
 
 class Commands:
@@ -81,3 +82,15 @@ class CommandFactory_Should(unittest.TestCase):
         cmd_factory = CommandFactory(Mock())
         with self.assertRaises(ApplicationError):
             cmd_factory.create(cmd.invalid)
+
+    def test_the_params_extracted_correctly_from_input(self):
+        cmd_factory = CommandFactory(Mock())
+        command = cmd_factory.create('addtest 2 description')
+
+        self.assertEqual(('2', 'description'), command.params)
+
+    def test_the_modelsFactory_passed_to_a_command(self):
+        cmd_factory = CommandFactory(Mock())
+        command = cmd_factory.create('addtest 2 description')
+
+        self.assertIsInstance(command.models_factory, ModelsFactory)
