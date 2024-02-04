@@ -1,6 +1,5 @@
 import unittest
 from models.test_group import TestGroup
-from models.constants.test_result import TestResult
 from errors.application_error import ApplicationError
 from unittest.mock import Mock
 from models.test import Test
@@ -9,7 +8,7 @@ ID = 1
 VALID_NAME = 'NAME'
 
 
-class TestRun_Should(unittest.TestCase):
+class TestGroup_Should(unittest.TestCase):
     def test_init_set_props(self):
         tgroup = TestGroup(ID, VALID_NAME)
 

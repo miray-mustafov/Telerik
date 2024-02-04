@@ -9,7 +9,7 @@ class TestRun:
 
         self._test_result = test_result
         self._runtime_ms = runtime_ms
-
+                
     @property
     def test_result(self):
         return self._test_result
