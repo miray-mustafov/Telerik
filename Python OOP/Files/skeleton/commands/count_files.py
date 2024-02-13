@@ -1,5 +1,5 @@
 from commands.base.base_command import BaseCommand
-
+import os
 
 class CountFilesCommand(BaseCommand):
 
@@ -7,4 +7,7 @@ class CountFilesCommand(BaseCommand):
         super().__init__(params, 0)
 
     def execute(self):
-       raise NotImplementedError()
+        demo_folder_path = self.demo_folder_path
+
+        files_count = sum(len(files) for _, _, files in os.walk(demo_folder_path))
+        return f"Total files in demo_folder: {files_count}"
