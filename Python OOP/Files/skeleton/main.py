@@ -1,5 +1,3 @@
-
-
 from core.command_factory import CommandFactory
 from core.engine import Engine
 
