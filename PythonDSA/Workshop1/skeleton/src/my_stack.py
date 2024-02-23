@@ -1,7 +1,7 @@
 from src.linked_list_node import LinkedListNode
 
 
-class CustomQueue:
+class CustomStack:
     def __init__(self):
         self.head = None
         self.tail = None
@@ -17,7 +17,7 @@ class CustomQueue:
             return False
         return True
 
-    def enqueue(self, val):
+    def push(self, val):
         node = LinkedListNode(val)
         if self.is_empty:
             self.head = node
@@ -28,15 +28,16 @@ class CustomQueue:
 
         self._count += 1
 
-    def dequeue(self):
+    def pop(self):
         if self.is_empty:
-            raise ValueError('Queue is empty!')
-        head_to_remove = self.head
-        self.head = self.head.next
+            raise ValueError('Stack is empty!')
+        tail_to_remove = self.head
+        self.tail = self.tail.next
         self._count -= 1
-        return head_to_remove.value
+        return tail_to_remove.value
 
     def peek(self):
         if self.is_empty:
-            raise ValueError('Queue is empty!')
-        return self.head.value
+            raise ValueError('Stack is empty!')
+        return self.tail.value
+
