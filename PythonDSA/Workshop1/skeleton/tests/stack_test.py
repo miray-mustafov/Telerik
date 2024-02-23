@@ -1,6 +1,6 @@
 import unittest
 
-from src.stack import CustomStack
+from src.my_stack import CustomStack
 
 
 def stack_from_list(*lst):

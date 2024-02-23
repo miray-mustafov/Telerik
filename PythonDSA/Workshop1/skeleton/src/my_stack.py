@@ -1,4 +1,4 @@
-from src.linked_list_node import LinkedListNode
+from src.linked_list_for_stack import LinkedListNodeStack
 
 
 class CustomStack:
@@ -18,12 +18,12 @@ class CustomStack:
         return True
 
     def push(self, val):
-        node = LinkedListNode(val)
+        node = LinkedListNodeStack(val)
         if self.is_empty:
-            self.head = node
-            self.tail = node
+            self.head = self.tail = node
         else:
             self.tail.next = node
+            node.prev = self.tail
             self.tail = node
 
         self._count += 1
@@ -31,8 +31,14 @@ class CustomStack:
     def pop(self):
         if self.is_empty:
             raise ValueError('Stack is empty!')
-        tail_to_remove = self.head
-        self.tail = self.tail.next
+
+        tail_to_remove = self.tail
+        if self._count == 1:
+            self.head = self.tail = None
+        else:
+            tail_to_remove.prev.next = None
+            self.tail = tail_to_remove.prev
+
         self._count -= 1
         return tail_to_remove.value
 
@@ -40,4 +46,3 @@ class CustomStack:
         if self.is_empty:
             raise ValueError('Stack is empty!')
         return self.tail.value
-

@@ -1,6 +1,6 @@
 import unittest
 
-from src.queue import CustomQueue
+from src.my_queue import CustomQueue
 
 
 def queue_from_list(*lst):

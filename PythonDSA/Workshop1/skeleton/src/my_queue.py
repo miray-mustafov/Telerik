@@ -20,8 +20,7 @@ class CustomQueue:
     def enqueue(self, val):
         node = LinkedListNode(val)
         if self.is_empty:
-            self.head = node
-            self.tail = node
+            self.head = self.tail = node
         else:
             self.tail.next = node
             self.tail = node
@@ -34,7 +33,7 @@ class CustomQueue:
         head_to_remove = self.head
         self.head = self.head.next
 
-        if self._count == 1:  # todo
+        if self._count == 1:
             self.tail = None
 
         self._count -= 1
@@ -45,13 +44,3 @@ class CustomQueue:
             raise ValueError('Queue is empty!')
         return self.head.value
 
-
-q = CustomQueue()
-print(q.is_empty)
-print(q.enqueue(1))
-print(q.is_empty)
-print()
-print(q.enqueue(2))
-print(q.dequeue())
-print(q.dequeue())
-print(q.is_empty)

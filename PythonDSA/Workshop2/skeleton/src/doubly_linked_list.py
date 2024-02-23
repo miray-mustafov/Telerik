@@ -7,6 +7,12 @@ class DoublyLinkedList:
         self._tail: LinkedListNode = None
         self._count = 0
 
+    def _insert_before_head(self, value):
+        raise NotImplementedError()
+
+    def _insert_after_tail(self, value):
+        raise NotImplementedError()
+
     @property
     def count(self):
         raise NotImplementedError()
@@ -41,10 +47,4 @@ class DoublyLinkedList:
         raise NotImplementedError()
 
     def values(self):
-        raise NotImplementedError()
-
-    def _insert_before_head(self, value):
-        raise NotImplementedError()
-
-    def _insert_after_tail(self, value):
         raise NotImplementedError()
