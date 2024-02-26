@@ -55,16 +55,10 @@ class DoublyLinkedList:
             self._insert_after_tail(value)
         else:
             new_node = LinkedListNode(value)
-
-            cur_node = self._head
-            while cur_node:
-                if cur_node == node:
-                    new_node.next = cur_node.next
-                    new_node.prev = cur_node
-                    cur_node.next.prev = new_node
-                    cur_node.next = new_node
-                    break
-                cur_node = cur_node.next
+            new_node.next = node.next
+            new_node.prev = node
+            node.next.prev = new_node
+            node.next = new_node
 
         self._count += 1
 
@@ -76,16 +70,10 @@ class DoublyLinkedList:
             self._insert_before_head(value)
         else:
             new_node = LinkedListNode(value)
-
-            cur_node = self._head
-            while cur_node:
-                if cur_node == node:
-                    new_node.next = cur_node
-                    new_node.prev = cur_node.prev
-                    cur_node.prev.next = new_node
-                    cur_node.prev = new_node
-                    break
-                cur_node = cur_node.next
+            new_node.next = node
+            new_node.prev = node.prev
+            node.prev.next = new_node
+            node.prev = new_node
 
         self._count += 1
 

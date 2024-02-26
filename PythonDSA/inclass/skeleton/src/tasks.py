@@ -1,8 +1,8 @@
 from src.common.list_node import ListNode
 from src.common.stack import Stack
 
-LIST1 = [1, 2, 3]
-LIST2 = [1, 2, 3, 4]
+LIST123 = [1, 2, 3]
+LIST1234 = [1, 2, 3, 4]
 
 
 def generate_LL_from_list(nums):
@@ -27,8 +27,8 @@ def find_middle_of_list(head: ListNode):
     return slow
 
 
-h1 = generate_LL_from_list(LIST1)
-h2 = generate_LL_from_list(LIST2)
+h1 = generate_LL_from_list(LIST123)
+h2 = generate_LL_from_list(LIST1234)
 print(find_middle_of_list(h1))  # node 2
 print(find_middle_of_list(h2))  # node 3
 
@@ -57,14 +57,33 @@ def merge_sorted_lists(h1: ListNode, h2: ListNode):
 
 h1 = generate_LL_from_list([1, 2, 3])
 h2 = generate_LL_from_list([1, 4])
-res_h: ListNode = merge_sorted_lists(h1, h2)
-print(res_h.make_list())
+res_h1: ListNode = merge_sorted_lists(h1, h2)
+print(res_h1.make_list())
 
 
 # task 3
-
+# [1, 2, 3, 4]
 def reverse_list(head: ListNode):
-    raise NotImplementedError()
+    if not head or not head.next:
+        return head
+
+    pointer = None
+    rev_h = head
+    cur_node = head
+    while cur_node.next:
+        cur_node = rev_h.next
+        rev_h.next = pointer
+
+        pointer = rev_h
+        rev_h = cur_node
+
+    rev_h.next = pointer
+    return rev_h
+
+
+h1 = generate_LL_from_list(LIST1234)
+reversed_h1 = reverse_list(h1)
+print(reversed_h1.make_list())
 
 
 # task 4
