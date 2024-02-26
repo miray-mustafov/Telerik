@@ -112,4 +112,17 @@ print(validate_parentheses(expression2))
 
 
 def backspace_char(sequence: str):
-    raise NotImplementedError()
+    my_stack = []
+    for el in sequence:
+        if my_stack and el == '#':
+            my_stack.pop()
+        elif el != '#':
+            my_stack.append(el)
+    return ''.join(my_stack)
+
+
+seq1 = 'abc#d'  # 'abd'
+seq2 = 'abcd##e##'  # 'a'
+print(backspace_char(seq1))
+print(backspace_char(seq2))
+print(backspace_char("abc####de"))  # 'de'
