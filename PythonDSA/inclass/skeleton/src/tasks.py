@@ -88,10 +88,28 @@ print(reversed_h1.make_list())
 # task 4
 
 def validate_parentheses(expr: str):
-    raise NotImplementedError()
+    my_stack = []
+    for el in expr:
+        if el == '(':
+            my_stack.append(el)
+        elif el == ')':
+            if not my_stack:
+                return False
+            my_stack.pop()
+
+    if my_stack:
+        return False
+    return True
+
+
+expression1 = "1 + (2 * 3)"
+expression2 = "2 + (1 + (2 * 3)"
+print(validate_parentheses(expression1))
+print(validate_parentheses(expression2))
 
 
 # task 5
+
 
 def backspace_char(sequence: str):
     raise NotImplementedError()
