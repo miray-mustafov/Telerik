@@ -67,18 +67,17 @@ def reverse_list(head: ListNode):
     if not head or not head.next:
         return head
 
-    pointer = None
-    rev_h = head
+    prev_node = None
     cur_node = head
-    while cur_node.next:
-        cur_node = rev_h.next
-        rev_h.next = pointer
 
-        pointer = rev_h
-        rev_h = cur_node
+    while cur_node:
+        next_node = cur_node.next
+        cur_node.next = prev_node
 
-    rev_h.next = pointer
-    return rev_h
+        prev_node = cur_node
+        cur_node = next_node
+
+    return prev_node
 
 
 h1 = generate_LL_from_list(LIST1234)
