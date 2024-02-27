@@ -29,7 +29,17 @@ print(two_sum(numbers, target_sum))
 
 
 def special_coins(coins: str, catalogue: str) -> int:
-    raise NotImplementedError()
+    catalogue_set = set(catalogue)
+    res = 0
+    for c in coins:
+        if c in catalogue_set:
+            res += 1
+    return res
+
+
+coins = 'aaAb'
+catalogue = 'ab'
+print(special_coins(coins, catalogue))
 
 
 def are_isomorphic(s1: str, s2: str) -> bool:
