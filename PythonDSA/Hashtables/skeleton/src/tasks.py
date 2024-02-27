@@ -33,4 +33,15 @@ def special_coins(coins: str, catalogue: str) -> int:
 
 
 def are_isomorphic(s1: str, s2: str) -> bool:
-    raise NotImplementedError()
+    d = {}
+    for i in range(len(s1)):
+        if s1[i] not in d:
+            d[s1[i]] = s2[i]
+        elif d[s1[i]] != s2[i]:
+            return False
+    return True
+
+
+print(are_isomorphic('tidal', 'paper'))
+# 'tidal'
+# 'paper'
