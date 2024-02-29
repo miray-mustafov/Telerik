@@ -298,7 +298,7 @@ class DoublyLinkedList_Should(unittest.TestCase):
         node = test_list.find(4)
 
         # Act
-        test_list.insert_before(node, 3)
+        test_list.move_p1_tothe_left_of_p2(node, 3)
 
         # Assert
         self.assertEqual((1, 2, 3, 4), test_list.values())
@@ -312,7 +312,7 @@ class DoublyLinkedList_Should(unittest.TestCase):
         node = test_list.find(2)
 
         # Act
-        test_list.insert_before(node, 1)
+        test_list.move_p1_tothe_left_of_p2(node, 1)
 
         # Assert
         self.assertEqual((1, 2, 3, 4), test_list.values())
@@ -326,7 +326,7 @@ class DoublyLinkedList_Should(unittest.TestCase):
         node = test_list.find(1)
 
         # Act
-        test_list.insert_before(node, 4)
+        test_list.move_p1_tothe_left_of_p2(node, 4)
 
         # Assert
         self.assertEqual(4, test_list.head.value)
@@ -340,7 +340,7 @@ class DoublyLinkedList_Should(unittest.TestCase):
         node = test_list.find(3)
 
         # Act
-        test_list.insert_before(node, 4)
+        test_list.move_p1_tothe_left_of_p2(node, 4)
 
         # Assert
         self.assertEqual(4, test_list.count)
@@ -351,7 +351,7 @@ class DoublyLinkedList_Should(unittest.TestCase):
 
         # Act & Assert
         with self.assertRaises(ValueError):
-            test_list.insert_before(None, 2)
+            test_list.move_p1_tothe_left_of_p2(None, 2)
 
     def test_removefirst_returnsCorrectValue_whenOneNodeList(self):
         # Arrange
