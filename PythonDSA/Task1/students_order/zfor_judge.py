@@ -13,10 +13,6 @@ class DoublyLinkedList:
         self.head: LinkedListNode = None
         self.d = {}  # build d{person_name: node}
 
-    @property
-    def count(self):
-        return len(self.d)
-
     def move_p1_tothe_left_of_p2(self, p1_name, p2_name):
         p1, p2 = self.d[p1_name], self.d[p2_name]
         if p1.next == p2:  # case when p1 is already left seated to p2

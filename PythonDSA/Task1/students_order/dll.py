@@ -64,7 +64,6 @@ class DoublyLinkedList:
 
             node, i = node.next, i + 1
             self.d[el] = node
-        # todo ? self.tail = node
 
     def print_to_console(self):
         node = self.head
