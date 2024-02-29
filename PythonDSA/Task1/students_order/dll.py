@@ -58,11 +58,11 @@ class DoublyLinkedList:
         self.head = LinkedListNode(first_value)
         self.d[first_value] = self.head
 
-        node, i = self.head, 1
+        node = self.head
         for el in l[1:]:
             node.next = LinkedListNode(el, prev=node)
 
-            node, i = node.next, i + 1
+            node = node.next
             self.d[el] = node
 
     def print_to_console(self):
