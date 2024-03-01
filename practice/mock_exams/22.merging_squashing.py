@@ -54,8 +54,8 @@ Output
 '''
 
 
-# n = int(input())
-# nums = [input() for _ in range(n)]
+# num = int(input())
+# nums = [input() for _ in range(num)]
 
 n = 4
 nums = ['12', '23', '34', '45']

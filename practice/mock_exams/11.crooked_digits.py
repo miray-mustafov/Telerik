@@ -36,7 +36,7 @@ Output
 '''
 
 
-# n = input()
+# num = input()
 n = '-7231'  # 4
 sum = 10
 while sum > 9:

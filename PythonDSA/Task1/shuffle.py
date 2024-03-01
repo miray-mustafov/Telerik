@@ -49,7 +49,7 @@ class LinkedListNode:
         self.next: LinkedListNode = next
 
     def __repr__(self):
-        return f'n{self.value}'
+        return f'num{self.value}'
 
 
 class DoublyLinkedList:
