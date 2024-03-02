@@ -1,12 +1,12 @@
-# num = '501'
+# n = '501'
 # sum = 0
 # multiplication = 1
 # counter = 0
 # for i in range(3):
-#     if int(num[i]) > 1:
-#         multiplication *= int(num[i])
+#     if int(n[i]) > 1:
+#         multiplication *= int(n[i])
 #     else:
-#         sum += int(num[i])
+#         sum += int(n[i])
 #         counter +=1
 # if sum == 3:
 #     print(3)
