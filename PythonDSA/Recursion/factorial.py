@@ -1,12 +1,12 @@
-n = int(input())
+def F(string_list):
+    if not string_list:
+        return 0
+    ch = string_list.pop()
+    if ch == 'x':
+        return 1 + F(string_list)
+    return 0 + F(string_list)
 
 
-def F(n):
-    if n == 2:
-        return 2
-    elif n == 1:
-        return 1
-    return n * F(n - 1)
-
-
-print(F(n))
+string = input()
+string_list = [ch for ch in string]
+print(F(string_list))

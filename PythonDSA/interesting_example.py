@@ -1,13 +1,13 @@
 """
 Hi,
 What do you think about the time complexity of second function here?
-At first, it looks like cubic() has O(n^3) but both functions practically scale quadratically,
+At first, it looks like cubic() has O(string_list^3) but both functions practically scale quadratically,
 considering the cases below.
 GPT is confused and gives both answers sometimes.
 """
 
 
-def quadratic(n):  # O(n^2)
+def quadratic(n):  # O(string_list^2)
     count = 0
     for a in range(n):
         for b in range(n):
