@@ -1,13 +1,13 @@
 '''
 Title Search
-You will receive a string_list title which contains only small latin
+You will receive a string title which contains only small latin
 letters [a-z]. After that you will have to read from the input N 
 lines of text. For each of these lines, your task is to find out if 
-there is such a sequence in the string_list you receive as input on the first
+there is such a sequence in the string you receive as input on the first
 line (title). The sequence may not be on consecutive indices. Each time 
 you find a sequence of these characters you remove it from the initial 
-string_list and print the modified string_list. If no such sequence is found
-you have to print No such title found! and not modify the string_list.
+string and print the modified string. If no such sequence is found
+you have to print No such title found! and not modify the string.
 
 Input
 cfoadset

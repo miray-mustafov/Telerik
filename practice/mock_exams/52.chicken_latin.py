@@ -16,7 +16,7 @@ Print the translated sentence.
 Input
 Read from the standard input:
 
-There is one line of input, a string_list:
+There is one line of input, a string:
 Hello there Amy
 Output
 Print to the standard output:

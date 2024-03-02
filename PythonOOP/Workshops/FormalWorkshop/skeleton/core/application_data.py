@@ -45,7 +45,7 @@ class ApplicationData:
         self._logged_user = None
 
     # def show_users(self):
-    #     res = '\string_list'.join([
+    #     res = '\string'.join([
     #         '--USERS--',
     #         '1. fake user str',
     #         '2. fake user str'

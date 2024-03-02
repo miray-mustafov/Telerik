@@ -17,15 +17,15 @@ result = f(base, n)
 print(result)
 
 # base = int(input())
-# string_list = int(input())
+# string = int(input())
 #
 #
-# def f(base, string_list):
-#     if string_list == 1:
+# def f(base, string):
+#     if string == 1:
 #         return base
-#     elif string_list == 0:
+#     elif string == 0:
 #         return 1
-#     return base * f(base, string_list - 1)
+#     return base * f(base, string - 1)
 #
 #
-# print(f(base, string_list))
+# print(f(base, string))

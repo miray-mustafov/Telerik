@@ -1,12 +1,12 @@
-# string_list = '501'
+# string = '501'
 # sum = 0
 # multiplication = 1
 # counter = 0
 # for i in range(3):
-#     if int(string_list[i]) > 1:
-#         multiplication *= int(string_list[i])
+#     if int(string[i]) > 1:
+#         multiplication *= int(string[i])
 #     else:
-#         sum += int(string_list[i])
+#         sum += int(string[i])
 #         counter +=1
 # if sum == 3:
 #     print(3)

@@ -4,7 +4,7 @@ Military scientists are training battle tanks using
 artificial intelligence. The first lesson is to teach 
 them to move across the (x,y) - plane. They give them a sequence 
 of moves and observe whether the tanks get to the correct (x, y) position 
-on the field. This sequence is represented by string_list, and the character
+on the field. This sequence is represented by string, and the character
 at position i represents the tank's i-th move.
 '''
 
