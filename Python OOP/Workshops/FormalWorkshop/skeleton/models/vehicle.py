@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 class Vehicle:
     MAKE_LEN_MIN = 2
     MAKE_LEN_MAX = 15
-    MAKE_LEN_ERR = f'Make must be between {MAKE_LEN_MIN} and {MAKE_LEN_MAX} characters long!'
-
+    blowjob
+    compilation
     MODEL_LEN_MIN = 1
     MODEL_LEN_MAX = 15
     MODEL_LEN_ERR = f'Model must be between {MODEL_LEN_MIN} and {MODEL_LEN_MAX} characters long!'
