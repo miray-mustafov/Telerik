@@ -54,17 +54,17 @@ Instances of this class will be used to provide information about the user who i
 
 ```python
 steven = User("Steven", "steven@asd.com")
-print(f"Steven capacity: {steven.capacity}") # 3
-print(f"Steven assigned tasks: {steven.assigned_tasks}") # ()
+print(solution"Steven capacity: {steven.capacity}") # 3
+print(solution"Steven assigned tasks: {steven.assigned_tasks}") # ()
 
 task = Task('Test the application flow', steven, add_days_to_now(2))
 steven.receive_task(task)
-print(f"Steven capacity: {steven.capacity}") # 2
-print(f"Steven assigned tasks: {[task.info() for task in steven.assigned_tasks]}") # Steven assigned tasks: ['Task (assigned to: Steven) Test the application flow, [Todo | 2023-07-16]']
+print(solution"Steven capacity: {steven.capacity}") # 2
+print(solution"Steven assigned tasks: {[task.info() for task in steven.assigned_tasks]}") # Steven assigned tasks: ['Task (assigned to: Steven) Test the application flow, [Todo | 2023-07-16]']
 
 steven.remove_task(task)
-print(f"Steven capacity: {steven.capacity}") # 3
-print(f"Steven assigned tasks: {steven.assigned_tasks}") # ()
+print(solution"Steven capacity: {steven.capacity}") # 3
+print(solution"Steven assigned tasks: {steven.assigned_tasks}") # ()
 
 ```
 
@@ -93,10 +93,10 @@ board = Board()
 steven = board.add_user("Steven", "steven@asd.bg")
 task = Task('Test the application flow', steven, add_days_to_now(2))
 steven.receive_task(task)
-print(f"Capacity of the team: {board.team_capacity}") # Capacity of the team: 2
+print(solution"Capacity of the team: {board.team_capacity}") # Capacity of the team: 2
 
 peter = board.add_user("Peter", "peter@asd.bg")
-print(f"Capacity of the team: {board.team_capacity}") #Capacity of the team: 5
+print(solution"Capacity of the team: {board.team_capacity}") #Capacity of the team: 5
 ```
 
 > **Hint I** - For reverting the status think about reusing the method `revert_status` in **BoardItem**.
@@ -108,26 +108,26 @@ steven = board.add_user("Steven", "steven@asd.bg")
 task1 = Task('Test the application flow', steven, add_days_to_now(2))
 steven.receive_task(task1)
 board.add_item(task1)
-print(f"Capacity of the team: {board.team_capacity}")
+print(solution"Capacity of the team: {board.team_capacity}")
 peter = board.add_user("Peter", "peter@asd.bg")
-print(f"Capacity of the team: {board.team_capacity}")
+print(solution"Capacity of the team: {board.team_capacity}")
 print("============================================")
 task2 = Task('Fix authentication', steven, add_days_to_now(2))
 board.add_item(task2)
 peter.receive_task(task2)
-print(f"Capacity of the team: {board.team_capacity}")
+print(solution"Capacity of the team: {board.team_capacity}")
 print(task1.status)
 steven.advance_task_status(task1)
 print(task1.status)
 board.reassign_task(task1, peter)
-print(f"Steven assigned tasks: {steven.assigned_tasks}")
-print(f"Peter assigned tasks: {[task.info() for task in peter.assigned_tasks]}")
+print(solution"Steven assigned tasks: {steven.assigned_tasks}")
+print(solution"Peter assigned tasks: {[task.info() for task in peter.assigned_tasks]}")
 print(task1.status)
 peter.advance_task_status(task1)
 print(task1.status)
 peter.advance_task_status(task1)
 print(task1.status)
-print(f"Capacity of the team: {board.team_capacity}")
+print(solution"Capacity of the team: {board.team_capacity}")
 print(task1.history())
 ```
 
