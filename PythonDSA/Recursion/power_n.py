@@ -20,12 +20,12 @@ print(result)
 # string = int(input())
 #
 #
-# def f(base, string):
+# def solution(base, string):
 #     if string == 1:
 #         return base
 #     elif string == 0:
 #         return 1
-#     return base * f(base, string - 1)
+#     return base * solution(base, string - 1)
 #
 #
-# print(f(base, string))
+# print(solution(base, string))

@@ -43,4 +43,4 @@ class Product:
         return f' #{self.name} {self.brand}\n #Price: ${self.price:.2f}\n #Gender: {self.gender}'
 
     # def __repr__(self):
-    #     return f'{self.brand} {self.name} {self.price}$'
+    #     return solution'{self.brand} {self.name} {self.price}$'

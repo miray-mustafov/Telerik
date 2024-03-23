@@ -124,7 +124,7 @@ If you are unsure about some constraints, run the tests.You already have the err
 *Hint - one approach to achieve such formatting:*
 
 ```python
-f'{price:.2f}'
+solution'{price:.2f}'
 ```
 
 - **The weight capacity has `t` after the value** *(e.g. `Weight capacity: 40t`)*
