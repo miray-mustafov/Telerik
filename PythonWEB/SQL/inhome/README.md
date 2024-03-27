@@ -4,7 +4,7 @@
 
 ## Instructions
 
-1. Start your favourite SQL Client and create new database "TelerikAcademy", using the [provided script](./database_telerikacademy.sql)
+1. Start your favourite SQL Client and create new database "TelerikAcademy", using the [provided script](database_telerikacademy.sql)
 1. Connect to the database "TelerikAcademy" and examine the major tables.
 1. Use the "TelerikAcademy" database for all tasks.
 1. Happy querying :)
