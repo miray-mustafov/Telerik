@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Response
 from data import Product, products
+import uvicorn
 
 app = FastAPI()
 
@@ -52,3 +53,7 @@ def update_product(id: int, product: Product):
         existing_product.price = product.price
 
         return existing_product
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000)

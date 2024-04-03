@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class Product(BaseModel):
-    id: int | None
+    id: int | None = None
     name: str
     description: str
     price: float
