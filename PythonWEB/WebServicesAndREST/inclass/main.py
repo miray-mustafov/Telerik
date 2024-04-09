@@ -125,4 +125,3 @@ def delete_order(id: int):
     if id not in orders:
         return Response('NOT FOUND', status_code=404)
     orders.pop(id)
-    return f"Order with id {id} deleted!"

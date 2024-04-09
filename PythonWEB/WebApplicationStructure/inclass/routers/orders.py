@@ -51,8 +51,10 @@ def update_order(id: int, order: Order):
     if order_service.has_missing_product_ids(order.product_ids):
         return Response(status_code=400, content='Must contain existing products')
 
+    # func in services
     existing_order.product_ids = order.product_ids
     existing_order.delivery_date = order.delivery_date
+    #
 
     return order_service.create_order_response(existing_order)
 

@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Response
 from pydantic import BaseModel
-from data import Category, Product
-from services import product_service
-from services import category_service
+from BusinessLayer.data import Category, Product
+from BusinessLayer.services import product_service
+from BusinessLayer.services import category_service
 
 
 class CategoryResponseModel(BaseModel):
