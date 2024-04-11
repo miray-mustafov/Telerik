@@ -4,11 +4,11 @@ from mariadb.connections import Connection
 
 def _get_connection() -> Connection:
     return connect(
-        user="root",
-        password="miralcho1234",
-        host="localhost",
+        user='root',
+        password='root',
+        host='localhost',
         port=3306,
-        database="data_access_demo_db"
+        database='ordering_api_db'
     )
 
 
@@ -33,4 +33,4 @@ def update_query(sql: str, sql_params=()) -> bool:
         cursor.execute(sql, sql_params)
         conn.commit()
 
-        return True
+    return True

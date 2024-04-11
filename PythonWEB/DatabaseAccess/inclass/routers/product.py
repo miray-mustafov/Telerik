@@ -3,14 +3,15 @@ from data.models import Product
 from services import product_service
 from services import category_service
 
+
 product_router = APIRouter(prefix='/products')
 
 
 @product_router.get('/')
 def get_products(
-        sort: str | None = None,
-        sort_by: str | None = None,
-        search: str | None = None
+    sort: str | None = None,
+    sort_by: str | None = None,
+    search: str | None = None
 ):
     result = product_service.all(search)
 

@@ -5,21 +5,22 @@ from mariadb.connections import Connection
 def _get_connection() -> Connection:
     return connect(
         user="root",
-        password="miralcho1234",
+        password="admin",
         host="localhost",
         port=3306,
-        database="data_access_demo_db"
+        database="music_db"
     )
 
 
-def read_query(sql: str, sql_params=()):
+def read_query(sql, sql_params=()):
     with _get_connection() as conn:
         cursor = conn.cursor()
         cursor.execute(sql, sql_params)
 
         return list(cursor)
 
-def insert_query(sql: str, sql_params=()) -> int:
+
+def insert_query(sql, sql_params=()):
     with _get_connection() as conn:
         cursor = conn.cursor()
         cursor.execute(sql, sql_params)
@@ -27,10 +28,12 @@ def insert_query(sql: str, sql_params=()) -> int:
 
         return cursor.lastrowid
 
-def update_query(sql: str, sql_params=()) -> bool:
+
+def update_query(sql, sql_params=()):
     with _get_connection() as conn:
         cursor = conn.cursor()
         cursor.execute(sql, sql_params)
         conn.commit()
 
         return True
+
