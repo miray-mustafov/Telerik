@@ -2,6 +2,14 @@ from data.models import Product
 from data.database import insert_query, read_query, update_query
 
 
+def exists(id: int):
+    return any(
+        read_query(
+            'select id from products where id = ?',
+            (id,))
+    )
+
+
 def all(search: str = None):
     if search is None:
         data = read_query(
@@ -36,11 +44,14 @@ def get_by_category(category_id: int):
 
 def sort(products: list[Product], *, attribute='price', reverse=False):
     if attribute == 'price':
-        def sort_fn(p: Product): return p.price
+        def sort_fn(p: Product):
+            return p.price
     elif attribute == 'name':
-        def sort_fn(p: Product): return p.name
+        def sort_fn(p: Product):
+            return p.name
     else:
-        def sort_fn(p: Product): return p.id
+        def sort_fn(p: Product):
+            return p.id
 
     return sorted(products, key=sort_fn, reverse=reverse)
 
@@ -50,6 +61,7 @@ def create(product: Product):
         'INSERT INTO products(name,description,price,category_id) VALUES(?,?,?,?)',
         (product.name, product.description, product.price, product.category_id))
 
+    # todo ?
     product.id = generated_id
 
     return product

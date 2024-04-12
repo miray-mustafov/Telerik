@@ -25,7 +25,16 @@ class Product(BaseModel):
 
 
 class Order(BaseModel):
-    id: int | None
+    id: int | None = None
     customer: str
-    product_ids: list[int]
+    product_ids: list[int]  # todo
     delivery_date: date
+
+    @classmethod
+    def from_query_result(cls, id, customer, product_ids, delivery_date):
+        return cls(
+            id=id,
+            customer=customer,
+            product_ids=product_ids,
+            delivery_date=delivery_date
+        )

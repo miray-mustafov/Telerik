@@ -1,5 +1,7 @@
 .gitignore
 ws1solution/
+notes.txt
+hidden.py
 tst.py
 .idea/
 __pycache__/

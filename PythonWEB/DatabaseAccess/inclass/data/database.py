@@ -9,7 +9,7 @@ def _get_connection() -> Connection:
         password=your_password,
         host='localhost',
         port=3306,
-        database='ordering_api_db'
+        database='data_access_demo_db'
     )
 
 
