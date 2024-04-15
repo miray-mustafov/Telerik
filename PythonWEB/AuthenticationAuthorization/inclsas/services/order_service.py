@@ -25,9 +25,6 @@ def all():
 
     return (Order.from_query_result(*obj) for obj in flattened.values())
 
-    # orders = [Order.from_query_result(*obj) for obj in flattened.values()]
-    # return orders
-
 
 def sort(lst: list[Order], reverse=False):
     return sorted(
@@ -128,5 +125,5 @@ def create_response_object(customer: User, order: Order, order_products: list[Pr
         'products': order_products,
         'delivery_date': order.delivery_date,
         'delivery_address': order.delivery_address,
-        'order_total': round(order_total, 2)
+        'order_total':  round(order_total, 2)
     }

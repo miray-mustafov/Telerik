@@ -44,7 +44,7 @@ class OrderUpdate(BaseModel):
     delivery_address: str | None
 
 
-TUsername = constr(pattern=r'^\w{2,30}$')
+TUsername = constr(regex='^\w{2,30}$')
 
 
 class User(BaseModel):
