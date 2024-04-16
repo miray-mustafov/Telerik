@@ -25,8 +25,9 @@ def update_query(sql: str, sql_params=()) -> bool:
         cursor = conn.cursor()
         cursor.execute(sql, sql_params)
         conn.commit()
-        
+
         return cursor.rowcount > 0
+
 
 def query_count(sql: str, sql_params=()):
     with connect(_DB_FILE) as conn:
@@ -42,13 +43,13 @@ def init_database():
         cursor = conn.cursor()
 
         cursor.execute('''CREATE TABLE IF NOT EXISTS projects (
-                                            id integer NOT NULL PRIMARY KEY,
+                                            id integer NOT NULL PRIMARY KEY AUTOINCREMENT,
                                             name text NOT NULL UNIQUE,
                                             is_open integer NOT NULL,
                                             team_limit integer NOT NULL);''')
 
         cursor.execute('''CREATE TABLE IF NOT EXISTS devs (
-                                            id integer NOT NULL  PRIMARY KEY,
+                                            id integer NOT NULL  PRIMARY KEY AUTOINCREMENT,
                                             name text NOT NULL UNIQUE,
                                             level integer NOT NULL );''')
 
