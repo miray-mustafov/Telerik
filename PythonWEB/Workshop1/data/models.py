@@ -1,15 +1,15 @@
 from datetime import date
 from pydantic import BaseModel, constr
 
-LEVELS = {
+DEV_LEVELS = {
     'junior': 1,
     'mid': 2,
     'senior': 3,
 }
 
-STATUS = {
-    "open",
-    "closed"
+PROJECT_STATUS = {
+    "open": 1,
+    "closed": 0
 }
 
 
