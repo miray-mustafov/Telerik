@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from services import projects_services
-from data.models import PROJECT_STATUS
+from data.models import PROJECT_STATUS_NUMS
 from common.responses import BadRequest
 
 projects_router = APIRouter(prefix='/projects')
@@ -13,8 +13,8 @@ def get_projects(
         status: str | None = None
 ):
 
-    if status and status not in PROJECT_STATUS:
-        BadRequest('Wrong status! Choose open or closed.')
+    if status and status.lower() not in PROJECT_STATUS_NUMS:
+        return BadRequest('Wrong status! Expected: open or closed.')
 
     result = projects_services.get_all(name, limit, status)
     return result

@@ -1,4 +1,4 @@
-from data.models import Project, DEV_LEVELS
+from data.models import Developer, DEV_LEVELS, LEVEL_DEVS
 from data.database import insert_query, read_query, update_query
 
 
@@ -14,4 +14,12 @@ def get_all(name=None, level_str=None):
     query = ('SELECT id, name, level FROM devs' +
              (' WHERE ' + ' AND '.join(filters) if filters else ""))
     data = read_query(query, params)
+
+    devs = [Developer(id=did, name=dname, level_str=LEVEL_DEVS[dlevel]) for did, dname, dlevel in data]
+    return devs
+
+
+def get_by_id(id: int):
+    data = read_query('SELECT id,name,level FROM devs WHERE id = ?', (id,))
+    # todo here
     return data
