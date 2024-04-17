@@ -1,4 +1,4 @@
-from data.models import Developer, DEV_LEVELS, LEVEL_DEVS
+from data.models import Developer, Project, DEV_LEVELS, LEVEL_DEVS
 from data.database import insert_query, read_query, update_query
 import sqlite3
 from pydantic import ValidationError
@@ -48,6 +48,10 @@ def create(dev: Developer):
 
     # except ValidationError as e:
     #     Handle pydantic errors ?
+
+
+def assign_project(dev: Developer, project: Project):
+    return None
 
 
 def delete(id: int):

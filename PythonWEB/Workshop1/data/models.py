@@ -8,6 +8,17 @@ PROJECT_STATUS_NUMS = {"open": 1, "closed": 0}
 PROJECT_NUMS_STATUS = {1: "open", 0: "closed"}
 
 
+class Status:
+    OPEN = 'open'
+    CLOSED = 'closed'
+
+
+class Seniority:
+    JUNIOR = 'junior'
+    MID = 'mid'
+    SENIOR = 'senior'
+
+
 class Developer(BaseModel):
     id: int | None = None
     name: str = Field(min_length=1)

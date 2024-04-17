@@ -1,7 +1,14 @@
 import sqlite3
-
 from data.models import Project, PROJECT_NUMS_STATUS, PROJECT_STATUS_NUMS, ProjectStatusUpdate
 from data.database import insert_query, read_query, update_query
+
+
+def is_team_limit_reached(project: Project):
+    cur_team_count = read_query(
+        'SELECT COUNT(*) FROM devs_projects WHERE project_id = ?', (project.id,)
+    )
+    cur_team_count = cur_team_count[0][0]
+    return project.team_limit == cur_team_count
 
 
 def get_all(name=None, limit=None, status=None):
