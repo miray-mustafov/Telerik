@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from services import devs_services, projects_services
-from data.models import Developer, DEV_LEVELS, Status
+from data.models import Developer, DEV_LEVELS, Status, Seniority
 from common.responses import BadRequest, NotFound
 
 devs_router = APIRouter(prefix='/devs')
@@ -48,9 +48,20 @@ def assign_dev_to_project(dev_id: int, project_id: int):
     if projects_services.is_team_limit_reached(project):
         return BadRequest("Project limit reached")
 
-    
-    # result = devs_services.assign_project(dev, project)
-    return "Hi"
+    if devs_services.already_assigned_to_that_project(dev_id, project_id):
+        return BadRequest('Dev already assigned to that project')
+
+    if not devs_services.can_assign_that_dev(dev):
+        return BadRequest('That Nonsenior dev already has project to work on')
+
+    if (dev.level_str != Seniority.SENIOR and
+            projects_services.will_reach_limit_without_a_senior(project)):
+        return BadRequest('Project must have at least one senior')
+
+    result = devs_services.assign_project(dev_id, project_id)
+    if result == dev_id:
+        return f'Dev {dev_id} {dev.name} assigned to project {project_id} {project.name}'
+    return result
 
 
 @devs_router.delete('/{id}', status_code=204)

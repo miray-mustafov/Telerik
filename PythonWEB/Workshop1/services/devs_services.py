@@ -1,7 +1,28 @@
-from data.models import Developer, Project, DEV_LEVELS, LEVEL_DEVS
+from data.models import Developer, Project, DEV_LEVELS, LEVEL_DEVS, Seniority
 from data.database import insert_query, read_query, update_query
 import sqlite3
 from pydantic import ValidationError
+
+
+def can_assign_that_dev(dev: Developer):
+    if dev.level_str == Seniority.SENIOR:
+        return True
+
+    cur_dev_projects = read_query(
+        'SELECT project_id FROM devs_projects WHERE dev_id = ?', (dev.id,)
+    )
+    if not cur_dev_projects:
+        return True
+
+    return False
+
+
+def already_assigned_to_that_project(dev_id: int, project_id: int):
+    data = cur_dev_projects = read_query(
+        'SELECT * FROM devs_projects WHERE dev_id = ? AND project_id = ? ',
+        (dev_id, project_id)
+    )
+    return True if data else False
 
 
 def get_all(name=None, level_str=None):
@@ -50,8 +71,15 @@ def create(dev: Developer):
     #     Handle pydantic errors ?
 
 
-def assign_project(dev: Developer, project: Project):
-    return None
+def assign_project(dev_id: int, project_id: int):
+    try:
+        returned_id = insert_query(
+            'INSERT INTO devs_projects(dev_id, project_id) VALUES(?,?)',
+            (dev_id, project_id,)
+        )
+        return returned_id
+    except sqlite3.Error as e:
+        return "Error:", e.args[0]
 
 
 def delete(id: int):
