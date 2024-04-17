@@ -21,6 +21,11 @@ class NoContent(Response):
         super().__init__(status_code=204)
 
 
+class Created(Response):
+    def __init__(self):
+        super().__init__(status_code=201)
+
+
 class InternalServerError(Response):
     def __init__(self):
         super().__init__(status_code=500)
