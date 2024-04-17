@@ -1,18 +1,5 @@
 from data.database import insert_query, read_query, update_query
-from data.models import Order, OrderUpdate, Product, User
-
-
-def sort(lst: list[Order], reverse=False):
-    return sorted(
-        lst,
-        key=lambda p: p.delivery_date,
-        reverse=reverse)
-
-
-def exists(order_id: int):
-    data = read_query('SELECT 1 from orders where id = ?', (order_id,))
-
-    return any(data)
+from data.models import Order, OrderResponse, OrderUpdate, Product, User
 
 
 def get_by_id(order_id: int):
@@ -23,20 +10,21 @@ def get_by_id(order_id: int):
 
 
 def all():
-    data = read_query('''SELECT o.id, o.delivery_date, o.delivery_address, o.user_id, op.product_id 
+    data = read_query('''SELECT id, delivery_date, delivery_address, user_id, product_id
                          FROM orders AS o
                            LEFT JOIN orders_products AS op
                              ON o.id = op.order_id''')
 
-    flattened = {}
-    for id, delivery_date, delivery_address, user_id, product_id in data:
-        if id not in flattened:
-            flattened[id] = (id, delivery_date, delivery_address, user_id, [])
+    flattened_data = _flatten_order_products(data)
 
-        if product_id is not None:
-            flattened[id][-1].append(product_id)
+    return (Order.from_query_result(*obj) for obj in flattened_data.values())
 
-    return (Order.from_query_result(*obj) for obj in flattened.values())
+
+def sort(lst: list[Order], reverse=False):
+    return sorted(
+        lst,
+        key=lambda p: p.delivery_date,
+        reverse=reverse)
 
 
 def get_order_products(order_id: int) -> list[Product]:
@@ -51,17 +39,34 @@ def get_order_products(order_id: int) -> list[Product]:
     return [Product.from_query_result(*row) for row in data]
 
 
+def get_user_orders(user: User):
+    data = read_query('''SELECT id, delivery_date, delivery_address, user_id, product_id
+                         FROM orders AS o
+                           LEFT JOIN orders_products AS op
+                             ON o.id = op.order_id
+                         WHERE user_id = ?''', (user.id,))
+
+    flattened_data = _flatten_order_products(data)
+
+    return (Order.from_query_result(*obj) for obj in flattened_data.values())
+
+
 def create(order: Order, customer: User):
     generated_id = insert_query(
         'INSERT INTO orders(delivery_date,delivery_address,user_id) VALUES(?,?,?)',
         (order.delivery_date, order.delivery_address, customer.id))
 
     order.id = generated_id
-    customer.order_ids.append(order.id)
 
     insert_products_to_order(order.id, order.product_ids)
 
     return order
+
+
+def exists(order_id: int):
+    data = read_query('SELECT 1 from orders where id = ?', (order_id,))
+
+    return any(data)
 
 
 def get_ordered_product_ids(order_id: int) -> set[int]:
@@ -75,8 +80,7 @@ def update(order_update: OrderUpdate, order: Order):
     result = update_query(
         '''UPDATE orders SET
            delivery_date = ?, delivery_address = ?
-           WHERE id = ?
-        ''',
+           WHERE id = ?''',
         (order_update.delivery_date, order_update.delivery_address, order.id))
 
     if result > 0:
@@ -87,11 +91,9 @@ def update(order_update: OrderUpdate, order: Order):
         return None
 
 
-def delete(order: Order, customer: User):
+def delete(order: Order):
     update_query('DELETE FROM orders_products WHERE order_id = ?', (order.id,))
     update_query('DELETE FROM orders WHERE id = ?', (order.id,))
-
-    customer.order_ids.remove(order.id)
 
 
 def insert_products_to_order(order_id: int, product_ids: list[int]):
@@ -111,14 +113,6 @@ def remove_products_from_order(order_id: int, product_ids: list[int]):
         (order_id,))
 
 
-def get_orders_by_user_id(user_id):
-    data = read_query(
-        'SELECT id, delivery_date, delivery_address, user_id FROM orders WHERE user_id = ?', (user_id,))
-
-    orders = [Order.from_query_result(*row) for row in data]
-    return orders
-
-
 def create_response_object(customer: User, order: Order, order_products: list[Product]):
     FREE_SHIPPING_LIMIT = 125.0
     SHIPPING_FEE = 1.02
@@ -127,11 +121,23 @@ def create_response_object(customer: User, order: Order, order_products: list[Pr
     if order_total > FREE_SHIPPING_LIMIT:
         order_total = order_total * SHIPPING_FEE
 
-    return {
-        'id': order.id,
-        'customer': customer,
-        'products': order_products,
-        'delivery_date': order.delivery_date,
-        'delivery_address': order.delivery_address,
-        'order_total': round(order_total, 2)
-    }
+    # changed to model for better http://127.0.0.1:8000/docs
+    return OrderResponse(
+        id=order.id,
+        customer=customer,
+        products=order_products,
+        delivery_date=order.delivery_date,
+        delivery_address=order.delivery_address,
+        order_total=round(order_total, 2))
+
+
+def _flatten_order_products(data: list[tuple]):
+    flattened = {}
+    for id, delivery_date, delivery_address, user_id, product_id in data:
+        if id not in flattened:
+            flattened[id] = (id, delivery_date, delivery_address, user_id, [])
+
+        if product_id is not None:
+            flattened[id][-1].append(product_id)
+
+    return flattened

@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Header
 from common.responses import BadRequest, InternalServerError, NoContent, NotFound, Unauthorized
 from common.auth import get_user_or_raise_401
-from data.models import Order, OrderUpdate
+from data.models import Order, OrderResponse, OrderUpdate
 from services import order_service
 from services import product_service
 from services import users_service
+
 
 orders_router = APIRouter(prefix='/orders')
 
@@ -23,7 +24,7 @@ def get_orders(sort: str | None = None, x_token=Header()):
         return orders
 
 
-@orders_router.get('/{id}')
+@orders_router.get('/{id}', response_model=OrderResponse)
 def get_order_by_id(id: int, x_token: str = Header()):
     customer = get_user_or_raise_401(x_token)
     order = order_service.get_by_id(id)
@@ -32,15 +33,13 @@ def get_order_by_id(id: int, x_token: str = Header()):
 
     products = order_service.get_order_products(order.id)
 
-    users_service.add_orders_to_user(customer)  # todo mod checkpoint
-
     return order_service.create_response_object(
         customer,
         order,
         products)
 
 
-@orders_router.post('/')
+@orders_router.post('/', response_model=OrderResponse)
 def create_order(order: Order, x_token: str = Header()):
     customer = get_user_or_raise_401(x_token)
 

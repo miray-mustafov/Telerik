@@ -10,7 +10,7 @@ users_router = APIRouter(prefix='/users')
 
 @users_router.post('/login')
 def login(data: LoginData):
-    user = users_service.find_by_username(data.username)
+    user = users_service.get_by_username(data.username)
 
     if user:
         token = users_service.create_token(user)

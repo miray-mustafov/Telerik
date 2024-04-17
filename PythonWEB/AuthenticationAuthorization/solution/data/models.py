@@ -28,18 +28,17 @@ class Order(BaseModel):
     id: int | None
     product_ids: list[int] = []
     delivery_date: date
-    user_id: int or None  # todo
     delivery_address: str | None
+    user_id: int | None
 
     @classmethod
-    def from_query_result(cls, id, delivery_date, delivery_address, user_id, product_ids=[]):
+    def from_query_result(cls, id, delivery_date, delivery_address, user_id=None, product_ids=[]):
         return cls(
             id=id,
             delivery_date=delivery_date,
             delivery_address=delivery_address,
             user_id=user_id,
-            product_ids=product_ids
-        )
+            product_ids=product_ids)
 
 
 class OrderUpdate(BaseModel):
@@ -47,7 +46,12 @@ class OrderUpdate(BaseModel):
     delivery_address: str | None
 
 
-TUsername = constr(pattern=r'^\w{2,30}$')
+class Role:
+    CUSTOMER = 'customer'
+    ADMIN = 'admin'
+
+
+TUsername = constr(regex='^\w{2,30}$')
 
 
 class User(BaseModel):
@@ -55,22 +59,28 @@ class User(BaseModel):
     username: TUsername
     password: str
     role: str
-    order_ids: list[int] = []
 
     def is_admin(self):
-        return self.role == 'Admin'
+        return self.role == Role.ADMIN
 
     @classmethod
-    def from_query_result(cls, id, username, password, role, order_ids=[]):
+    def from_query_result(cls, id, username, password, role):
         return cls(
             id=id,
             username=username,
             password=password,
-            role=role,
-            order_ids=order_ids
-        )
-
+            role=role)
 
 
 class LoginData(BaseModel):
     username: TUsername
+    password: str
+
+
+class OrderResponse(BaseModel):
+    id: int
+    customer: User
+    products: list[Product]
+    delivery_date: date
+    delivery_address: str | None
+    order_total: float
