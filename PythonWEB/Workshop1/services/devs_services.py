@@ -83,6 +83,19 @@ def assign_project(dev_id: int, project_id: int):
 
 
 def delete(id: int):
-    update_query(
-        '''DELETE FROM devs WHERE id = ?''', (id,)
-    )
+    try:
+        update_query(
+            '''DELETE FROM devs WHERE id = ?''', (id,)
+        )
+    except sqlite3.Error as e:
+        return "Error:", e.args[0]
+
+def remove_from_project(dev_id: int, project_id: int):
+    try:
+        update_query(
+            '''DELETE FROM devs_projects WHERE dev_id = ? AND project_id = ?''',
+            (dev_id, project_id)
+        )
+        return True
+    except sqlite3.Error as e:
+        return "Error:", e.args[0]

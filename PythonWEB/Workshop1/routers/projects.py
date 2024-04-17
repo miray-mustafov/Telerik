@@ -41,7 +41,7 @@ def update_project(id: int, status_obj: ProjectStatusUpdate):
     result = projects_services.update(existing_project, status_obj)
     return result
 
-
-@projects_router.delete('/{id}', status_code=204)
-def delete_project(id):
-    projects_services.delete(id)
+# use with caution bcs the devs_projects table
+# @projects_router.delete('/{id}', status_code=204)
+# def delete_project(id):
+#     projects_services.delete(id)

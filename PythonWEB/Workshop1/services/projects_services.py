@@ -80,9 +80,12 @@ def create(project: Project):
 
 
 def delete(id: int):
-    update_query(
-        '''DELETE FROM projects WHERE id = ?''', (id,)
-    )
+    try:
+        update_query(
+            '''DELETE FROM projects WHERE id = ?''', (id,)
+        )
+    except sqlite3.Error as e:
+        return "Error:", e.args[0]
 
 
 def update(existing_project: Project, status_obj: ProjectStatusUpdate):

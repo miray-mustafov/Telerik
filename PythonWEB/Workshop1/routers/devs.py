@@ -64,6 +64,20 @@ def assign_dev_to_project(dev_id: int, project_id: int):
     return result
 
 
-@devs_router.delete('/{id}', status_code=204)
-def delete_dev(id):
-    devs_services.delete(id)
+@devs_router.delete('/{dev_id}/projects/{project_id}')
+def remove_dev_from_project(dev_id: int, project_id: int):
+    if not devs_services.get_by_id(dev_id):
+        return BadRequest("No such dev")
+
+    if not projects_services.get_by_id(project_id):
+        return BadRequest("No such project")
+
+    is_deleted = devs_services.remove_from_project(dev_id, project_id)
+    if is_deleted:
+        return f'Dev with id: {dev_id} is no longer in project with id: {project_id}'
+    return is_deleted
+
+# use with caution bcs the devs_projects table
+# @devs_router.delete('/{id}', status_code=204)
+# def delete_dev(id):
+#     devs_services.delete(id)
