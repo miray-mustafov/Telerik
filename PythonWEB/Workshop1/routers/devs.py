@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 from services import devs_services, projects_services
 from data.models import Developer, DEV_LEVELS, Status, Seniority
 from common.responses import BadRequest, NotFound
@@ -9,7 +9,7 @@ devs_router = APIRouter(prefix='/devs')
 @devs_router.get('/')
 def get_devs(
         name: str | None = None,
-        level_str: str | None = None
+        level_str: str | None = Query(default=None, pattern=r'^(junior|mid|senior)$') # todo Good
 ):
     if level_str and level_str.lower() not in DEV_LEVELS:
         return BadRequest('Wrong seniority level. Expected: junior, mid or senior.')
