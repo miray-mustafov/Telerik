@@ -24,13 +24,12 @@ class Product(BaseModel):  # modified
             category_id=category_id)
 
 
-
 class Order(BaseModel):  # modified
     id: int | None = None
     product_ids: list[int] = []
     delivery_date: date
     delivery_address: str | None = None
-    user_id: int
+    user_id: int | None = None
 
     @classmethod
     def from_query_result(cls, id, delivery_date, delivery_address, user_id=None, product_ids=[]):

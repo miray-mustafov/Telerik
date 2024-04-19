@@ -44,3 +44,7 @@ def order_response_view(data):
         f'Products:',
         *(product_view(p) for p in products)
     ])
+
+
+def product_response_view(data):
+    NotImplementedError()

@@ -4,8 +4,8 @@ from data.database import insert_query, read_query
 from data.models import Order, Role, User
 from mariadb import IntegrityError
 
-
 _SEPARATOR = ';'
+
 
 # passwords should be secured as hashstrings in DB
 # def _hash_password(password: str):
@@ -44,14 +44,16 @@ def create(username: str, password: str) -> Optional[User]:
 
 
 def create_token(user: User) -> str:
-    # note: this token is not particulary secure, use JWT for real-world uses
+    # note: this token is not particularly secure, use JWT for real-world uses
     return f'{user.id}{_SEPARATOR}{user.username}'
 
 
 def is_authenticated(token: str) -> bool:
+    if not token:  # modified added
+        return False
     return any(read_query(
         'SELECT 1 FROM users where id = ? and username = ?',
-        # note: this token is not particulary secure, use JWT for real-world user
+        # note: this token is not particularly secure, use JWT for real-world user
         token.split(_SEPARATOR)))
 
 

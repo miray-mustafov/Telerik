@@ -1,6 +1,7 @@
 import commands.category as categories
 import commands.users as users
 import commands.orders as orders
+import commands.products as products
 from storage import TokenStorage
 
 
@@ -29,7 +30,7 @@ def main():
         if choice == 'C':
             categories.select_action()
         elif choice == 'P':
-            raise NotImplementedError()
+            products.select_action()
         elif choice == 'U':
             users.select_action()
         elif choice == 'O':

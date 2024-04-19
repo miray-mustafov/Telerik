@@ -37,7 +37,7 @@ def get_product_by_id(id: int):
 @product_router.post('/', status_code=201)
 def create_product(product: Product):
     if not category_service.exists(product.category_id):
-        return BadRequest('Category {product.category_id} does not exist')
+        return BadRequest(f'Category {product.category_id} does not exist')
 
     return product_service.create(product)
 
@@ -55,7 +55,7 @@ def update_product(id: int, product: Product):
 
 
 @product_router.delete('/{id}')
-def update_product(id: int):
+def delete_product(id: int):
     product_service.delete(id)
 
     return NoContent()

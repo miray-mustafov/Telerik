@@ -8,7 +8,6 @@ from services import order_service
 from services import product_service
 from services import users_service
 
-
 orders_router = APIRouter(prefix='/orders')
 
 
@@ -67,6 +66,7 @@ def update_order(id: int, data: OrderUpdate, x_token: str = Header()):
         return NotFound()
 
     if not users_service.owns_order(customer, order):
+        # return NotFound() i think?
         return Unauthorized('Can`t edit others` orders')
 
     order = order_service.update(data, order)

@@ -10,7 +10,8 @@ def show_all(token):
     response = requests.get(f'{ORDERS_URL}', headers={'x-token': token})
 
     if response.status_code == 200:
-        print(response.json())
+        [print(el) for el in response.json()]
+        # print(response.json())
     else:
         print(response.text)
 
@@ -34,9 +35,9 @@ def create(token):
     product_ids = input('Product ids, separated by space = ')
 
     data = {
-        'product_ids': [int(id) for id in product_ids.split()],
         'delivery_date': delivery_date,
         'delivery_address': address,
+        'product_ids': [int(id) for id in product_ids.split()],
     }
 
     response = requests.post(f'{ORDERS_URL}',
