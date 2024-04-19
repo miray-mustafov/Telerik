@@ -1,5 +1,6 @@
 import requests
 from config import BASE_URL
+from commands.action import Action
 
 CATEGORIES_URL = f'{BASE_URL}/categories'
 
@@ -47,12 +48,13 @@ def create_category():
 
 def select_action():
     actions = {
-        'single': show_by_id,
-        'all': show_all,
-        'create': create_category
+        'S': Action(show_by_id, requires_login=False, name='[S]ingle'),
+        'A': Action(show_all, requires_login=False, name='[A]ll'),
+        'C': Action(create_category, requires_login=False, name='[C]reate')
     }
 
     print('Select category action?')
-    print(' / '.join(actions.keys()))
+    print(' / '.join(action.name for action in actions.values()))
 
-    actions[input().lower()]()
+    selected_action = input().upper()
+    actions.get(selected_action, Action.default()).execute()

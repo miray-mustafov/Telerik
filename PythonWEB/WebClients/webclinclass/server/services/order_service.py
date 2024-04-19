@@ -4,7 +4,8 @@ from data.models import Order, OrderResponse, OrderUpdate, Product, User, UserRe
 
 def get_by_id(order_id: int):
     order_data = read_query(
-        'select id, delivery_date, delivery_address, user_id from orders where id = ?', (order_id,))
+        'select id, delivery_date, delivery_address, user_id from orders where id = ?',
+        (order_id,))
 
     return next((Order.from_query_result(*row) for row in order_data), None)
 

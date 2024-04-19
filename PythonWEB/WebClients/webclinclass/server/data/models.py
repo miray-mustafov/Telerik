@@ -7,12 +7,12 @@ class Category(BaseModel):
     name: str
 
 
-class Product(BaseModel):
+class Product(BaseModel):  # modified
     id: int | None = None
     name: str
     description: str
     price: float
-    category_id: int
+    category_id: int | None = None
 
     @classmethod
     def from_query_result(cls, id, name, description, price, category_id):
@@ -24,11 +24,12 @@ class Product(BaseModel):
             category_id=category_id)
 
 
-class Order(BaseModel):
+
+class Order(BaseModel):  # modified
     id: int | None = None
     product_ids: list[int] = []
     delivery_date: date
-    delivery_address: str
+    delivery_address: str | None = None
     user_id: int
 
     @classmethod
