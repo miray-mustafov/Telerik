@@ -1,0 +1,143 @@
+body {
+    font-family: Roboto, Helvetica Neue, sans-serif;
+    padding: 0px 5vw;
+    color: #5f6368
+}
+
+.material-symbols-outlined {
+    vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+}
+
+nav {
+    border-bottom: 2px solid #5f6368;
+    padding: 10px 0
+}
+
+nav a {
+    display: inline-block;
+    padding: 3px 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #5f6368;
+    font-weight: bold;
+}
+
+nav a:hover,
+a.selected {
+    color: #1967d2;
+}
+
+nav.categories {
+    border-bottom: 1px solid #5f6368;
+    padding: 5px 0
+}
+
+nav.categories a {
+    font-size: 14px;
+}
+
+div.product {
+    padding: 10px 0 0 0;
+    border-bottom: 1px solid #ccc;
+}
+
+
+div.product header .p-price {
+    font-weight: bold;
+    font-size: 22px
+}
+
+div.product header .p-name {
+    font-size: 22px
+}
+
+div.manage-product {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+div.manage-product .product {
+    min-width: 50%;
+    border-bottom: none;
+}
+
+div.manage-product div.category-badge {
+    display: inline-block;
+    background-color: #1967d2;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+div.manage-product div.menu {
+    padding: 5px 0;
+}
+
+div.manage-product div.menu button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+div.manage-product div.menu button:hover {
+    background: #eee;
+}
+
+div.manage-product .confirmation-msg {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 10px;
+}
+
+div.edit-product a,
+div.create-product a {
+    color: #1967d2;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+div.edit-product form div,
+div.create-product form div {
+    padding: 10px
+}
+
+div.edit-product form button,
+div.create-product form button {
+    background: dodgerblue;
+    border: none;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+div.add-new-product {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+div.add-new-product a {
+    color: #28a745;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+div.add-new-product a:hover {
+    background: #d6ffe0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+input,
+textarea,
+select {
+    font-size: 18px;
+    padding: 5px;
+}
