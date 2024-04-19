@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Body
 from services import projects_services
 from data.models import Project, PROJECT_STATUS_NUMS, ProjectStatusUpdate
 from common.responses import BadRequest, NotFound
@@ -34,12 +34,20 @@ def create_project(project: Project):
 
 
 @projects_router.put('/{id}')
-def update_project(id: int, status_obj: ProjectStatusUpdate):
+def update_project(id: int, status: str = Body(embed=True, pattern=r'^(open|closed)$')):
     existing_project = projects_services.get_by_id(id)
     if not existing_project:
         return BadRequest(f'No project with id: {id}!')
-    result = projects_services.update(existing_project, status_obj)
+    result = projects_services.update(existing_project, status)
     return result
+
+# @projects_router.put('/{id}')
+# def update_project(id: int, status_obj: ProjectStatusUpdate):
+#     existing_project = projects_services.get_by_id(id)
+#     if not existing_project:
+#         return BadRequest(f'No project with id: {id}!')
+#     result = projects_services.update(existing_project, status_obj)
+#     return result
 
 # use with caution bcs the devs_projects table
 # @projects_router.delete('/{id}', status_code=204)

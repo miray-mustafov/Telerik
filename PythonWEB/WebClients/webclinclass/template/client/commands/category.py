@@ -1,12 +1,12 @@
 import requests
 from config import BASE_URL
 
-USERS_URL = f'{BASE_URL}/users'
+CATEGORIES_URL = f'{BASE_URL}/categories'
 
 
-def get_info_by_id():
+def show_by_id():
     category_id = int(input('Category id = '))
-    response = requests.get(f'{USERS_URL}/{category_id}')
+    response = requests.get(f'{CATEGORIES_URL}/{category_id}')
     data = response.json()
 
     category = data['category']
@@ -17,8 +17,8 @@ def get_info_by_id():
         print(product)
 
 
-def login():
-    response = requests.get(USERS_URL)
+def show_all():
+    response = requests.get(CATEGORIES_URL)
     data = response.json()
     for object in data:
         category = object['category']
@@ -28,15 +28,12 @@ def login():
             f'{category["id"]}. {category["name"]} ({len(products)} products)')
 
 
-def register():
-    username = input('Username = ')
-    password = input('Password = ')
-    role = input('Role = ')  # todo remove and add user_update_role
+def create_category():
+    name = input('Category name = ')
 
-    response = requests.post(USERS_URL, json={'name': username, 'password': password, 'role': role})
+    response = requests.post(CATEGORIES_URL, json={'name': name})
 
-    #todo HERE, open the authentication solution, run server
-    if response.status_code == 204:  # Created
+    if response.status_code == 200:
         id = response.json()['category']['id']
         print(f'Created category with id {id}')
     if response.status_code == 400:
@@ -50,12 +47,12 @@ def register():
 
 def select_action():
     actions = {
-        'login': login,
-        'register': register,
-        'info': get_info_by_id,
+        'single': show_by_id,
+        'all': show_all,
+        'create': create_category
     }
 
-    print('Select user action?')
+    print('Select category action?')
     print(' / '.join(actions.keys()))
 
     actions[input().lower()]()

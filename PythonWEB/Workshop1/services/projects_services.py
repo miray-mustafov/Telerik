@@ -88,12 +88,12 @@ def delete(id: int):
         return "Error:", e.args[0]
 
 
-def update(existing_project: Project, status_obj: ProjectStatusUpdate):
-    new_is_open = PROJECT_STATUS_NUMS[status_obj.status]
+def update(existing_project: Project, status: str):
+    new_is_open = PROJECT_STATUS_NUMS[status]
     update_query('UPDATE projects SET is_open = ? WHERE id = ? ',
                  (new_is_open, existing_project.id))
 
-    existing_project.status = status_obj.status
+    existing_project.status = status
     return existing_project
 
 
