@@ -72,7 +72,9 @@ def init_database():
         insert_query('''INSERT INTO categories(name) VALUES 
                         ('Cell Phones'),
                         ('Computers and Accessories'),
-                        ('Television');''')
+                        ('Television'),
+                        ('No one likes that category')
+                        ;''')
 
     if query_count('SELECT COUNT(*) from products') == 0:
         print('Inserting products')

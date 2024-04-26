@@ -4,7 +4,8 @@ from services import categories_services
 
 categories_router = APIRouter(prefix='/categories', tags=['categories'])
 
-# @categories_router.get('/')
-# def get_all_categories():
-#     categories = categories_services.get_all()
-#     return categories
+
+@categories_router.get('/')
+def get_all_categories(country_code: str | None = None):
+    categories = categories_services.get_all(country_code)
+    return categories

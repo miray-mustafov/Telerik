@@ -19,6 +19,20 @@ class Category(BaseModel):
     name: str
 
 
+class CategoryRelevance(BaseModel):
+    id: int | None = None
+    name: str
+    relevance: int
+
+    @classmethod
+    def from_query_result(cls, id, name, relevance):
+        return cls(
+            id=id,
+            name=name,
+            relevance=relevance
+        )
+
+
 class Product(BaseModel):
     id: int | None = None
     name: str
