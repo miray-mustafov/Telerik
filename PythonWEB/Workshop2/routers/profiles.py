@@ -16,3 +16,9 @@ def get_all_profiles(country_code: str | None = None):
 def get_all_country_codes():
     country_codes = profiles_services.get_all_country_codes()
     return country_codes
+
+
+@profiles_router.get('/{id}')
+def get_profile_by_id(id: int):
+    profile = profiles_services.get_by_id_with_categories(id)
+    return profile
