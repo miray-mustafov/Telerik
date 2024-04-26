@@ -9,6 +9,14 @@ def profile_exists(id: int):
     return data[0][0] > 0
 
 
+def get_by_ip_address(ip_address: str):
+    data = read_query('''
+        SELECT id,ip_address, country_code FROM profiles WHERE ip_address = ? 
+        ''', (ip_address,))
+    if data:
+        return [Profile(id=id, ip_address=ip, country_code=code) for id, ip, code in data][0]
+
+
 def get_all(country_code: str | None = None) -> list[Profile]:
     query = 'SELECT id, ip_address, country_code FROM profiles'
     params = ()

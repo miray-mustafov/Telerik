@@ -30,3 +30,12 @@ def update_profile_category_interest(profile_id: int, category_id: int):
         (interest, category_id, profile_id,)
     )
     return interest
+
+
+def get_profile_category_interests(profile_id):
+    data = read_query(
+        f'''SELECT category_id, relevance FROM interests WHERE profile_id = ?''',
+        (profile_id,)
+    )
+    if data:
+        return data

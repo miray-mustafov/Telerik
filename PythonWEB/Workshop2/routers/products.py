@@ -20,3 +20,15 @@ def view_product_by_profile_id_product_id(product_id: int, profile_id: int):
         interest = interests_services.update_profile_category_interest(profile_id, product.category_id)
 
     return product, {"interest": interest}
+
+
+@products_router.get('/profiles/{ip_address}')
+def serve_ad(ip_address: str):
+    profile = profiles_services.get_by_ip_address(ip_address)
+    if not profile:
+        return BadRequest('No such ip address')
+
+    profile_category_interests: list[str] = interests_services.get_profile_category_interests(profile.id)
+
+    product = products_services.get_random_product_by_categories(profile_category_interests)
+    return product

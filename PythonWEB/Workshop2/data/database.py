@@ -90,7 +90,9 @@ def init_database():
         insert_query('''INSERT INTO profiles(ip_address, country_code) VALUES 
                         ('81.161.239.88','BG'),
                         ('81.161.252.171','BG'),
-                        ('104.123.59.151','SWE')''')
+                        ('104.123.59.151','SWE'),
+                        ('10.10.10.100','USA')
+                        ''')
 
     if query_count('SELECT COUNT(*) from interests') == 0:
         print('Inserting interests')
