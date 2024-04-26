@@ -112,6 +112,7 @@ def remove_products(token):
 
 
 def select_action():
+
     actions = {
         'A': Action(show_all, requires_login=True, name='[A]ll'),
         'S': Action(single, requires_login=True, name='[S]ingle'),

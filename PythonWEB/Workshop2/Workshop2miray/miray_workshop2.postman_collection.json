@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "8c30c9be-173a-403c-bb33-84805bd8d1fe",
+		"name": "miray_workshop2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33982445"
+	},
+	"item": [
+		{
+			"name": "get all profiles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/profiles/?country_code=BG",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"profiles",
+						""
+					],
+					"query": [
+						{
+							"key": "country_code",
+							"value": "BG"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all unique country codes",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get by id with categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/profiles/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"profiles",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view product (incremets interest)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/products/2/profiles/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"products",
+						"2",
+						"profiles",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view product (new interest)",
+			"request": {
+				"method": "PUT",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "serve ad",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "serve ad without interests",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get categories",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "categories",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
