@@ -2,6 +2,13 @@ from data.database import read_query
 from data.models import Profile
 
 
+def profile_exists(id: int):
+    data = read_query('''
+        SELECT COUNT(*) FROM profiles WHERE id = ? 
+        ''', (id,))
+    return data[0][0] > 0
+
+
 def get_all(country_code: str | None = None) -> list[Profile]:
     query = 'SELECT id, ip_address, country_code FROM profiles'
     params = ()
@@ -33,6 +40,9 @@ def get_by_id_with_categories(id: int) -> Profile | None:
         JOIN categories AS c ON i.category_id = c.id
         WHERE i.profile_id = ?
         ''', (id,))
+
+    if not data:
+        return None
 
     data = list(sorted(data, key=lambda x: -x[-1]))
     data = _response_object(data)

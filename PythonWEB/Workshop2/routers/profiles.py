@@ -1,7 +1,7 @@
 from fastapi import APIRouter
+from common.responses import NotFound
 from data.models import Profile
 from services import profiles_services
-from common.responses import BadRequest
 
 profiles_router = APIRouter(prefix='/profiles', tags=['profiles'])
 
@@ -21,4 +21,6 @@ def get_all_country_codes():
 @profiles_router.get('/{id}')
 def get_profile_by_id(id: int):
     profile = profiles_services.get_by_id_with_categories(id)
+    if not profile:
+        return NotFound()
     return profile
