@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException
+from unittest import mock
+from fastapi import APIRouter
 from pydantic import BaseModel
 from common.responses import NotFound
 from data.models import Category, Product
@@ -9,7 +10,6 @@ from services import category_service
 class CategoryResponseModel(BaseModel):
     category: Category
     products: list[Product]
-
 
 categories_router = APIRouter(prefix='/categories')
 
@@ -28,8 +28,7 @@ def get_category_by_id(id: int):
     category = category_service.get_by_id(id)
 
     if category is None:
-        return HTTPException(404)
-        # return NotFound()
+        return NotFound()
     else:
         return CategoryResponseModel(
             category=category,
